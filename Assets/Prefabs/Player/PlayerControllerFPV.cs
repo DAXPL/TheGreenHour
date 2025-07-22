@@ -2,170 +2,148 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController))]
-public class PlayerControllerFPV : MonoBehaviour
+namespace GreenHour.Player
 {
-    [SerializeField] private Camera playerCamera;
-
-    [Header("Key Bindings")]
-    [SerializeField] private InputActionReference moveReference;
-    [SerializeField] private InputActionReference lookReference;
-    [SerializeField] private InputActionReference crouchReference;
-    [SerializeField] private InputActionReference primaryActionReference;
-    [SerializeField] private InputActionReference secondaryActionReference;
-
-    [Header("Settings")]
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float lookSensitivity = 1f;
-    [SerializeField] private float crouchHeight = 1f;
-    [SerializeField] private float standingHeight = 2f;
-    [SerializeField] private float crouchSpeed = 2.5f;
-    [SerializeField] private float actionRange = 5.0f;
-    [SerializeField] private LayerMask actionMask;
-
-    private CharacterController characterController;
-    private Vector3 moveDirection;
-    private Vector2 lookInput;
-
-    private float gravity = -9.81f;
-    private float verticalVelocity;
-    private float pitch = 0f;
-
-    private bool isCrouching = false;
-
-    private void Awake()
+    [RequireComponent(typeof(CharacterController))]
+    public class PlayerControllerFPV : MonoBehaviour
     {
-        characterController = GetComponent<CharacterController>();
-    }
+        [SerializeField] private Camera playerCamera;
 
-    private void OnEnable()
-    {
-        if (moveReference)
-        {
-            moveReference.action.performed += OnMove;
-            moveReference.action.canceled += OnMove;
-        }
-        if (lookReference)
-        {
-            lookReference.action.performed += OnLook;
-            lookReference.action.canceled += OnLook;
-        }
-        if (crouchReference)
-        {
-            crouchReference.action.performed += OnCrouch;
-        }
-        if (primaryActionReference)
-        {
-            primaryActionReference.action.performed += OnPrimaryAction;
-        }
-    }
+        [Header("Key Bindings")]
+        [SerializeField] private InputActionReference moveReference;
+        [SerializeField] private InputActionReference lookReference;
+        [SerializeField] private InputActionReference crouchReference;
 
-    private void OnDisable()
-    {
-        if (moveReference)
-        {
-            moveReference.action.performed -= OnMove;
-            moveReference.action.canceled -= OnMove;
-        }
-        if (lookReference)
-        {
-            lookReference.action.performed -= OnLook;
-            lookReference.action.canceled -= OnLook;
-        }
-        if (crouchReference)
-        {
-            crouchReference.action.performed -= OnCrouch;
-        }
-        if (primaryActionReference)
-        {
-            primaryActionReference.action.performed -= OnPrimaryAction;
-        }
-    }
+        [Header("Settings")]
+        [SerializeField] private float moveSpeed = 5f;
+        [SerializeField] private float lookSensitivity = 1f;
+        [SerializeField] private float crouchHeight = 1f;
+        [SerializeField] private float standingHeight = 2f;
+        [SerializeField] private float crouchSpeed = 2.5f;
+        
 
-    private void Update()
-    {
-        HandleMovement();
-        HandleLook();
-        HandleCrouchTransition();
-    }
+        private CharacterController characterController;
+        private Vector3 moveDirection;
+        private Vector2 lookInput;
 
-    private void OnMove(InputAction.CallbackContext context)
-    {
-        Vector2 input = context.ReadValue<Vector2>();
-        moveDirection = new Vector3(input.x, 0, input.y);
-    }
+        private float gravity = -9.81f;
+        private float verticalVelocity;
+        private float pitch = 0f;
 
-    private void OnLook(InputAction.CallbackContext context)
-    {
-        lookInput = context.ReadValue<Vector2>();
-    }
+        private bool isCrouching = false;
 
-    private void OnCrouch(InputAction.CallbackContext context)
-    {
-        isCrouching = !isCrouching;
-    }
-
-    private void OnPrimaryAction(InputAction.CallbackContext context)
-    {
-        RaycastHit hit;
-        Transform origin = playerCamera?playerCamera.transform:this.transform;
-        if (Physics.Raycast(origin.position, origin.forward, out hit, actionRange, actionMask))
+        private void Awake()
         {
-            Debug.Log(hit.collider.name);
-            Debug.DrawRay(origin.position, origin.TransformDirection(Vector3.forward) * hit.distance, Color.green,1.0f);
-        }
-        else
-        {
-            Debug.DrawRay(origin.position, origin.TransformDirection(Vector3.forward) * actionRange, Color.red, 1.0f);
-        }
-    }
-    private void HandleMovement()
-    {
-        Vector3 move = transform.right * moveDirection.x + transform.forward * moveDirection.z;
-
-        float currentSpeed = isCrouching ? crouchSpeed : moveSpeed;
-        move *= currentSpeed;
-
-        if (characterController.isGrounded && verticalVelocity < 0)
-        {
-            verticalVelocity = -2f;
+            characterController = GetComponent<CharacterController>();
         }
 
-        verticalVelocity += gravity * Time.deltaTime;
-        move.y = verticalVelocity;
-
-        characterController.Move(move * Time.deltaTime);
-    }
-
-    private void HandleLook()
-    {
-        if (playerCamera == null) return;
-
-        float mouseX = lookInput.x * lookSensitivity;
-        float mouseY = lookInput.y * lookSensitivity;
-
-        pitch -= mouseY;
-        pitch = Mathf.Clamp(pitch, -90f, 90f);
-
-        playerCamera.transform.localRotation = Quaternion.Euler(pitch, 0, 0);
-        transform.Rotate(Vector3.up * mouseX);
-    }
-
-    private void HandleCrouchTransition()
-    {
-        float targetHeight = isCrouching ? crouchHeight : standingHeight;
-
-        if (!isCrouching)
+        private void OnEnable()
         {
-            Vector3 top = transform.position + Vector3.up * (characterController.height / 2);
-            if (Physics.SphereCast(top, characterController.radius * 0.9f, Vector3.up, out RaycastHit hit, standingHeight - crouchHeight))
+            if (moveReference)
             {
-                targetHeight = crouchHeight;
+                moveReference.action.performed += OnMove;
+                moveReference.action.canceled += OnMove;
+            }
+            if (lookReference)
+            {
+                lookReference.action.performed += OnLook;
+                lookReference.action.canceled += OnLook;
+            }
+            if (crouchReference)
+            {
+                crouchReference.action.performed += OnCrouch;
             }
         }
 
-        characterController.height = targetHeight;
-        characterController.center = new Vector3(0, targetHeight / 2, 0);
-        if(playerCamera) playerCamera.transform.localPosition = new Vector3(0, targetHeight * 0.75f, 0);
+        private void OnDisable()
+        {
+            if (moveReference)
+            {
+                moveReference.action.performed -= OnMove;
+                moveReference.action.canceled -= OnMove;
+            }
+            if (lookReference)
+            {
+                lookReference.action.performed -= OnLook;
+                lookReference.action.canceled -= OnLook;
+            }
+            if (crouchReference)
+            {
+                crouchReference.action.performed -= OnCrouch;
+            }
+        }
+
+        private void Update()
+        {
+            HandleMovement();
+            HandleLook();
+            HandleCrouchTransition();
+        }
+
+        private void OnMove(InputAction.CallbackContext context)
+        {
+            Vector2 input = context.ReadValue<Vector2>();
+            moveDirection = new Vector3(input.x, 0, input.y);
+        }
+
+        private void OnLook(InputAction.CallbackContext context)
+        {
+            lookInput = context.ReadValue<Vector2>();
+        }
+
+        private void OnCrouch(InputAction.CallbackContext context)
+        {
+            isCrouching = !isCrouching;
+        }
+
+        private void HandleMovement()
+        {
+            Vector3 move = transform.right * moveDirection.x + transform.forward * moveDirection.z;
+
+            float currentSpeed = isCrouching ? crouchSpeed : moveSpeed;
+            move *= currentSpeed;
+
+            if (characterController.isGrounded && verticalVelocity < 0)
+            {
+                verticalVelocity = -2f;
+            }
+
+            verticalVelocity += gravity * Time.deltaTime;
+            move.y = verticalVelocity;
+
+            characterController.Move(move * Time.deltaTime);
+        }
+
+        private void HandleLook()
+        {
+            if (playerCamera == null) return;
+
+            float mouseX = lookInput.x * lookSensitivity;
+            float mouseY = lookInput.y * lookSensitivity;
+
+            pitch -= mouseY;
+            pitch = Mathf.Clamp(pitch, -90f, 90f);
+
+            playerCamera.transform.localRotation = Quaternion.Euler(pitch, 0, 0);
+            transform.Rotate(Vector3.up * mouseX);
+        }
+
+        private void HandleCrouchTransition()
+        {
+            float targetHeight = isCrouching ? crouchHeight : standingHeight;
+
+            if (!isCrouching)
+            {
+                Vector3 top = transform.position + Vector3.up * (characterController.height / 2);
+                if (Physics.SphereCast(top, characterController.radius * 0.9f, Vector3.up, out RaycastHit hit, standingHeight - crouchHeight))
+                {
+                    targetHeight = crouchHeight;
+                }
+            }
+
+            characterController.height = targetHeight;
+            characterController.center = new Vector3(0, targetHeight / 2, 0);
+            if (playerCamera) playerCamera.transform.localPosition = new Vector3(0, targetHeight * 0.75f, 0);
+        }
     }
 }

@@ -14,6 +14,8 @@ namespace GreenHour.Player
         [Header("Interaction settings")]
         [SerializeField] private float actionRange = 5.0f;
         [SerializeField] private LayerMask actionMask;
+        [Header("Interface")]
+        [SerializeField] private Animator interactionAnimator;
 
         private void OnEnable()
         {
@@ -52,8 +54,9 @@ namespace GreenHour.Player
 
         private void Update()
         {
-            if (interactor == null) return;
             Interactor i = GetInteractor();
+            interactionAnimator?.SetBool("isActive", i != null);
+            if (interactor == null) return;
 
             if (i == null || i != interactor)
             {

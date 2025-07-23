@@ -13,6 +13,7 @@ namespace GreenHour.Interactions
         [SerializeField] private UnityEvent OnInteractionSuccess;
         public void StartInteraction()
         {
+            if(isInInteraction == true) return;
             isInInteraction = true;
             activationTimer = 0;
             OnStartInteraction.Invoke();
@@ -21,6 +22,7 @@ namespace GreenHour.Interactions
 
         public void StopInteraction()
         {
+            if(isInInteraction == false) return;
             isInInteraction = false;
             activationTimer = 0;
             OnStopInteraction.Invoke();
@@ -33,10 +35,10 @@ namespace GreenHour.Interactions
             OnInteractionSuccess.Invoke();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (!isInInteraction) return;
-            activationTimer += Time.fixedDeltaTime;
+            activationTimer += Time.deltaTime;
             if (activationTimer >= activationTime) InteractionSucceed();
         }
     }

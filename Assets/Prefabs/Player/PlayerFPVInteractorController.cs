@@ -2,7 +2,6 @@ using GreenHour.Interactions;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 namespace GreenHour.Player
 {
     public class PlayerFPVInteractorController : MonoBehaviour

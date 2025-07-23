@@ -1,10 +1,15 @@
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
+using GreenHour.PhysicsSurface;
+using static GreenHour.PhysicsSurface.Surface;
+using static GreenHour.PhysicsSurface.SurfaceData;
 
 namespace GreenHour.Player
 {
     [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(AudioSource))]
     public class PlayerControllerFPV : MonoBehaviour
     {
         [SerializeField] private Camera playerCamera;
@@ -15,12 +20,17 @@ namespace GreenHour.Player
         [SerializeField] private InputActionReference crouchReference;
 
         [Header("Settings")]
+        [SerializeField] private SurfaceData defaultSurfaceData;
+        [SerializeField] private LayerMask walkingMask;
+        [Space]
         [SerializeField] private float moveSpeed = 5f;
+        [SerializeField] private float stepDistance = 0.5f;
         [SerializeField] private float lookSensitivity = 1f;
         [SerializeField] private float crouchHeight = 1f;
         [SerializeField] private float standingHeight = 2f;
         [SerializeField] private float crouchSpeed = 2.5f;
         
+        private AudioSource audioSource;
 
         private CharacterController characterController;
         private Vector3 moveDirection;
@@ -31,10 +41,15 @@ namespace GreenHour.Player
         private float pitch = 0f;
 
         private bool isCrouching = false;
+        private bool wasGrounded = false;
+
+        private float stepLen = 0.0f;
+        private float airborneTime = 0f;
 
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();
+            audioSource = GetComponent<AudioSource>();
         }
 
         private void OnEnable()
@@ -100,17 +115,40 @@ namespace GreenHour.Player
         {
             Vector3 move = transform.right * moveDirection.x + transform.forward * moveDirection.z;
 
+            bool isGrounded = characterController.isGrounded;
             float currentSpeed = isCrouching ? crouchSpeed : moveSpeed;
             move *= currentSpeed;
 
-            if (characterController.isGrounded && verticalVelocity < 0)
+
+            if(isGrounded == false)
             {
-                verticalVelocity = -2f;
+                airborneTime += Time.deltaTime;
+            }
+            if (wasGrounded == false && isGrounded && airborneTime>=0.2f)
+            {
+                Debug.Log("Player landed on the ground.");
+                PlaySound(SoundType.Landing, 2f, 0.75f);
+                wasGrounded = true;
+                airborneTime = 0f;
+            }
+
+            if (isGrounded)
+            {
+                airborneTime = 0.0f;
+                if (verticalVelocity < 0)verticalVelocity = -2f;
+                
+            }
+
+            stepLen += move.magnitude * Time.deltaTime;
+            if (stepLen >= stepDistance)
+            {
+                PlaySound(SoundType.Walk, isCrouching?0.25f:1.0f);
+                stepLen = 0.0f;
             }
 
             verticalVelocity += gravity * Time.deltaTime;
             move.y = verticalVelocity;
-
+            wasGrounded = characterController.isGrounded;
             characterController.Move(move * Time.deltaTime);
         }
 
@@ -144,6 +182,22 @@ namespace GreenHour.Player
             characterController.height = targetHeight;
             characterController.center = new Vector3(0, targetHeight / 2, 0);
             if (playerCamera) playerCamera.transform.localPosition = new Vector3(0, targetHeight * 0.75f, 0);
+        }
+
+        
+        private void PlaySound(SoundType type, float volumeScale=1.0f, float pitchScale = 1.0f)
+        {
+            if (audioSource == null) return;
+            Vector3 rayOrigin = transform.position + (Vector3.up * 0.1f);
+            if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, 0.2f, walkingMask))
+            {
+                Surface groundSurface = hit.collider.GetComponent<Surface>();
+                AudioClip clip = groundSurface ? groundSurface.GetSound(type) : (defaultSurfaceData ? defaultSurfaceData.GetSound(type) : null);
+                if (clip == null) return;
+                audioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f) * pitchScale;//Sound fatigue
+                float volume = audioSource.volume;
+                audioSource.PlayOneShot(clip, volumeScale);
+            }
         }
     }
 }

@@ -24,3 +24,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6eee7f295d5ff8b4f934dec7f44eaf97, type: 3}
   - {fileID: 8300000, guid: 9b1f6289334342841afe6a5a8349e7ec, type: 3}
   - {fileID: 8300000, guid: afeb90013e6764449ae1616f47705ff7, type: 3}
+  landingSound:
+  - {fileID: 8300000, guid: 3e10d68c7f7aa854694549c916e8ba46, type: 3}
+  - {fileID: 8300000, guid: baf90d315c62c1648ba2901ff92db065, type: 3}
+  - {fileID: 8300000, guid: 70bfbaaebebfb0d4ba87a5e9947d5ad3, type: 3}
+  - {fileID: 8300000, guid: 80d4ea7778bc3d9459d9fcea672afcee, type: 3}
+  - {fileID: 8300000, guid: 314755392aa072e4eb6fc3b02b791b72, type: 3}
+  - {fileID: 8300000, guid: f7d6941d3b847874686c2b6a80ab8a1b, type: 3}

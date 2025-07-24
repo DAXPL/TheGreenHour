@@ -119,7 +119,6 @@ namespace GreenHour.Player
             float currentSpeed = isCrouching ? crouchSpeed : moveSpeed;
             move *= currentSpeed;
 
-
             if(isGrounded == false)
             {
                 airborneTime += Time.deltaTime;

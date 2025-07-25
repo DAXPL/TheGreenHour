@@ -100,14 +100,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 336904851395747443}
-  primaryActionReference: {fileID: 1781555164194001046, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+  primaryActionReference: {fileID: 1120369429361536294, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   secondaryActionReference: {fileID: 1781555164194001046, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+  menuActionReference: {fileID: 6810363165229233849, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   actionRange: 5
   actionMask:
     serializedVersion: 2
     m_Bits: 1
   interactionAnimator: {fileID: 0}
   grabOrigin: {fileID: 8138464338575200458}
+  interactionUI: {fileID: 0}
 --- !u!82 &641883666330477780
 AudioSource:
   m_ObjectHideFlags: 0
@@ -117,7 +119,7 @@ AudioSource:
   m_GameObject: {fileID: 4433318664393792370}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4689918598178458500, guid: e4c79c6e73475c34d841bf23c41fdd78, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0

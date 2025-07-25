@@ -14,6 +14,7 @@ namespace GreenHour.Player
         [Header("Key bindings")]
         [SerializeField] private InputActionReference primaryActionReference;
         [SerializeField] private InputActionReference secondaryActionReference;
+        [SerializeField] private InputActionReference menuActionReference;
         [Header("Interaction settings")]
         [SerializeField] private float actionRange = 5.0f;
         [SerializeField] private LayerMask actionMask;
@@ -23,7 +24,8 @@ namespace GreenHour.Player
         [SerializeField] private XRDirectInteractor grabOrigin;
         private XRGrabInteractable grabbedInteractable;
         private FixedJoint grabJoint;
-
+        [Header("UI")]
+        [SerializeField] private GameObject interactionUI;
 
         private void OnEnable()
         {
@@ -32,6 +34,20 @@ namespace GreenHour.Player
                 primaryActionReference.action.started += OnPrimaryAction;
                 primaryActionReference.action.canceled += OnPrimaryActionCanceled;
             }
+            if (secondaryActionReference)
+            {
+                secondaryActionReference.action.started += OnSecondaryAction;
+                secondaryActionReference.action.canceled += OnSecondaryActionCanceled;
+            }
+            if(menuActionReference)
+            {
+                menuActionReference.action.started += OnMenuAction;
+            }
+        }
+
+        private void OnMenuAction(InputAction.CallbackContext context)
+        {
+            if(interactionUI) interactionUI.SetActive(!interactionUI.activeSelf);
         }
 
         private void OnDisable()
@@ -45,30 +61,34 @@ namespace GreenHour.Player
         
         private void OnPrimaryAction(InputAction.CallbackContext context)
         {
+            GameObject go = GetGameobject();
+            if (go != null && go.TryGetComponent(out XRGrabInteractable xrGrab))
+            {
+                Grab(xrGrab);
+            }  
+        }
+        private void OnSecondaryAction(InputAction.CallbackContext context)
+        {
             Interactor i = GetInteractor();
-            if(i != null)
+            if (i != null)
             {
                 interactor = i;
                 interactor.StartInteraction();
                 return;
             }
-
-            GameObject go = GetGameobject();
-            if (go != null && go.TryGetComponent(out XRGrabInteractable xrGrab))
-            {
-                Grab(xrGrab);
-            }
-            
         }
 
         private void OnPrimaryActionCanceled(InputAction.CallbackContext context)
         {
-            if(interactor != null)
+            Release();
+        }
+        private void OnSecondaryActionCanceled(InputAction.CallbackContext context)
+        {
+            if (interactor != null)
             {
                 interactor.StopInteraction();
             }
             interactor = null;
-            Release();
         }
 
         private void Update()

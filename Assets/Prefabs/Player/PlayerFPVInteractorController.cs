@@ -2,6 +2,9 @@ using GreenHour.Interactions;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 namespace GreenHour.Player
 {
     public class PlayerFPVInteractorController : MonoBehaviour
@@ -16,12 +19,17 @@ namespace GreenHour.Player
         [SerializeField] private LayerMask actionMask;
         [Header("Interface")]
         [SerializeField] private Animator interactionAnimator;
+        [Header("Grabbing")]
+        [SerializeField] private XRDirectInteractor grabOrigin;
+        private XRGrabInteractable grabbedInteractable;
+        private FixedJoint grabJoint;
+
 
         private void OnEnable()
         {
             if (primaryActionReference)
             {
-                primaryActionReference.action.performed += OnPrimaryAction;
+                primaryActionReference.action.started += OnPrimaryAction;
                 primaryActionReference.action.canceled += OnPrimaryActionCanceled;
             }
         }
@@ -38,9 +46,19 @@ namespace GreenHour.Player
         private void OnPrimaryAction(InputAction.CallbackContext context)
         {
             Interactor i = GetInteractor();
-            if(i == null) return;
-            interactor = i;
-            interactor.StartInteraction();
+            if(i != null)
+            {
+                interactor = i;
+                interactor.StartInteraction();
+                return;
+            }
+
+            GameObject go = GetGameobject();
+            if (go != null && go.TryGetComponent(out XRGrabInteractable xrGrab))
+            {
+                Grab(xrGrab);
+            }
+            
         }
 
         private void OnPrimaryActionCanceled(InputAction.CallbackContext context)
@@ -50,6 +68,7 @@ namespace GreenHour.Player
                 interactor.StopInteraction();
             }
             interactor = null;
+            Release();
         }
 
         private void Update()
@@ -82,6 +101,36 @@ namespace GreenHour.Player
             }
             Debug.DrawRay(origin.position, origin.TransformDirection(Vector3.forward) * hit.distance, Color.green, 1.0f);
             return i;
+        }
+        
+        private GameObject GetGameobject()
+        {
+            RaycastHit hit;
+            Transform origin = playerCamera ? playerCamera.transform : this.transform;
+            if (!Physics.Raycast(origin.position, origin.forward, out hit, actionRange, actionMask))
+            {
+                Debug.DrawRay(origin.position, origin.TransformDirection(Vector3.forward) * actionRange, Color.red, 1.0f);
+                return null;
+            }
+            else
+            {
+                Debug.DrawRay(origin.position, origin.TransformDirection(Vector3.forward) * hit.distance, Color.green, 1.0f);
+                return hit.collider.gameObject;
+            }
+        }
+        
+        public void Grab(XRGrabInteractable interactable)
+        {
+            if (grabbedInteractable != null) return;
+            grabbedInteractable = interactable;
+            grabOrigin.StartManualInteraction((IXRSelectInteractable)interactable);
+        }
+        public void Release()
+        {
+            if (grabbedInteractable == null) return;
+
+            grabOrigin.EndManualInteraction();
+            grabbedInteractable = null;
         }
     }
 }

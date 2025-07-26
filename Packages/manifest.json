@@ -5,6 +5,7 @@
     "com.unity.inputsystem": "1.13.1",
     "com.unity.polybrush": "1.1.8",
     "com.unity.render-pipelines.high-definition": "17.0.4",
+    "com.unity.rendering.denoising": "1.0.5",
     "com.unity.shadergraph": "17.0.4",
     "com.unity.terrain-tools": "5.1.2",
     "com.unity.timeline": "1.8.8",

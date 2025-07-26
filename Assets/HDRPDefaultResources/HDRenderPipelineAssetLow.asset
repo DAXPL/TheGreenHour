@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RenderPipelineSettings:
     supportShadowMask: 1
-    supportSSR: 0
-    supportSSRTransparent: 0
+    supportSSR: 1
+    supportSSRTransparent: 1
     supportSSAO: 1
-    supportSSGI: 0
+    supportSSGI: 1
     supportSubsurfaceScattering: 1
     sssSampleBudget:
       m_Values: 140000002800000050000000
@@ -28,10 +28,10 @@ MonoBehaviour:
       m_SchemaId:
         m_Id: With3Levels
     supportVolumetrics: 1
-    supportVolumetricClouds: 0
+    supportVolumetricClouds: 1
     supportLightLayers: 0
     renderingLayerMaskBuffer: 0
-    supportWater: 0
+    supportWater: 1
     waterSimulationResolution: 128
     supportWaterExclusion: 1
     supportWaterDecals: 1
@@ -72,7 +72,7 @@ MonoBehaviour:
     supportDataDrivenLensFlare: 1
     supportDitheringCrossFade: 0
     supportRuntimeAOVAPI: 0
-    supportTerrainHole: 0
+    supportTerrainHole: 1
     lightProbeSystem: 1
     oldLightProbeSystem: 0
     probeVolumeMemoryBudget: 1024
@@ -108,8 +108,8 @@ MonoBehaviour:
       maxDirectionalLightsOnScreen: 16
       maxPunctualLightsOnScreen: 512
       maxAreaLightsOnScreen: 64
-      maxCubeReflectionOnScreen: 32
-      maxPlanarReflectionOnScreen: 8
+      maxCubeReflectionOnScreen: 64
+      maxPlanarReflectionOnScreen: 64
       maxDecalsOnScreen: 512
       maxLightsPerClusterCell: 8
       maxLocalVolumetricFogSize: 0

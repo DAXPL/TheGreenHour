@@ -4,7 +4,7 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 0
+  m_CurrentQuality: 2
   m_QualitySettings:
   - serializedVersion: 4
     name: Low
@@ -100,11 +100,11 @@ QualitySettings:
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     customRenderPipeline: {fileID: 11400000, guid: b77f7dd012d9cf0488799cb01b7004e1, type: 2}
-    terrainQualityOverrides: 0
+    terrainQualityOverrides: 12
     terrainPixelError: 1
-    terrainDetailDensityScale: 1
+    terrainDetailDensityScale: 0.3
     terrainBasemapDistance: 1000
-    terrainDetailDistance: 80
+    terrainDetailDistance: 15
     terrainTreeDistance: 5000
     terrainBillboardStart: 50
     terrainFadeLength: 5
@@ -152,7 +152,7 @@ QualitySettings:
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     customRenderPipeline: {fileID: 11400000, guid: cbe3d1574b126944ebabaabef1f48629, type: 2}
-    terrainQualityOverrides: 0
+    terrainQualityOverrides: 14
     terrainPixelError: 1
     terrainDetailDensityScale: 1
     terrainBasemapDistance: 1000

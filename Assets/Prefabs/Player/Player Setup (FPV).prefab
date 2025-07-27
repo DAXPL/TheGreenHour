@@ -260,7 +260,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6290339222913338385}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -413,18 +413,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7989078610241643352}
     m_Modifications:
-    - target: {fileID: 641883666330477780, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
-      propertyPath: m_Volume
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 641883666330477780, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 641883666330477780, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1611327557663127772, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
       propertyPath: interactionUI
       value: 
@@ -433,18 +421,6 @@ PrefabInstance:
       propertyPath: interactionAnimator
       value: 
       objectReference: {fileID: 6026862221051428526}
-    - target: {fileID: 1611327557663127772, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
-      propertyPath: primaryActionReference
-      value: 
-      objectReference: {fileID: 3422415163434681465, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-    - target: {fileID: 2420509135092188987, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
-      propertyPath: defaultSurfaceData
-      value: 
-      objectReference: {fileID: 11400000, guid: a15ce883cf991b940beed530fdbe3042, type: 2}
-    - target: {fileID: 2420509135092188987, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
-      propertyPath: walkingMask.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4433318664393792370, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
       propertyPath: m_Name
       value: Player (FPV)

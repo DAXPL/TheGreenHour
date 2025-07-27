@@ -56,10 +56,17 @@ namespace GreenHour.GameSettings
 
             resolutionDropdown.onValueChanged.AddListener(SetResolution);
 
-            fullscreenToggle.isOn = Screen.fullScreen;
-            vsyncToggle.isOn = QualitySettings.vSyncCount > 0;
-            fullscreenToggle.onValueChanged.AddListener(SetFullscreen);
-            vsyncToggle.onValueChanged.AddListener(SetVSync);
+            if (fullscreenToggle)
+            {
+                fullscreenToggle.isOn = Screen.fullScreen;
+                if (fullscreenToggle) fullscreenToggle.onValueChanged.AddListener(SetFullscreen);
+            }
+
+            if (vsyncToggle)
+            { 
+                vsyncToggle.isOn = QualitySettings.vSyncCount > 0;
+                vsyncToggle.onValueChanged.AddListener(SetVSync);
+            }
         }
 
         private void SetVSync(bool arg)

@@ -77,7 +77,7 @@ MonoBehaviour:
   moveReference: {fileID: -1680190386980627800, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   lookReference: {fileID: -5630151704836100654, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   crouchReference: {fileID: 7040659881675835329, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-  defaultSurfaceData: {fileID: 11400000, guid: a15ce883cf991b940beed530fdbe3042, type: 2}
+  defaultSurfaceData: {fileID: 11400000, guid: bd53667b8aa17c34ba45013b94676ad0, type: 2}
   walkingMask:
     serializedVersion: 2
     m_Bits: 1

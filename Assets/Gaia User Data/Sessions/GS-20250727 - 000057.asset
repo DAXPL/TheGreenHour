@@ -24,7 +24,7 @@ MonoBehaviour:
   m_terrainDepth: 2048
   m_terrainHeight: 2048
   m_seaLevel: 38.9
-  m_spawnDensity: 1
+  m_spawnDensity: 2
   m_isLocked: 0
   m_previewImageBytes: 
   m_previewImageWidth: 0
@@ -62,16 +62,27 @@ MonoBehaviour:
     sessionPlaybackState: 1
     m_terrainsFoldedOut: 0
     m_serializedExternalAction: 
+  - m_description: Spawning - Multiple Spawners (4)
+    m_operationType: 7
+    m_isActive: 1
+    m_affectedTerrainNames:
+    - Terrain_0_0-20250727 - 000755
+    m_operationDateTime: 03.08.2025 12:50:43
+    scriptableObjectAssetGUID: 4fbb6511c9e53164cbe2c8ffe2f69910
+    m_isFoldedOut: 0
+    sessionPlaybackState: 1
+    m_terrainsFoldedOut: 0
+    m_serializedExternalAction: 
   m_terrainMinMaxCache:
-  - guid: Worldmap
-    isWorldmap: 1
-    recalculate: 0
-    min: 38.675076
-    max: 126.63383
   - guid: a42992580ab35fb4581c9575bf735c2d
     isWorldmap: 0
     recalculate: 0
     min: 15.812741
     max: 138.0021
+  - guid: Worldmap
+    isWorldmap: 1
+    recalculate: 0
+    min: 38.675076
+    max: 126.63383
   m_bakedMaskCacheEntries: []
   m_worldBiomeMaskSettings: {fileID: 0}

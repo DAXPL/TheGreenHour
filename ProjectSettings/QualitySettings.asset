@@ -33,7 +33,7 @@ QualitySettings:
     realtimeGICPUUsage: 25
     adaptiveVsyncExtraA: 0
     adaptiveVsyncExtraB: 0
-    lodBias: 0.3
+    lodBias: 0.5
     maximumLODLevel: 2
     enableLODCrossFade: 1
     streamingMipmapsActive: 0
@@ -78,15 +78,15 @@ QualitySettings:
     softParticles: 0
     softVegetation: 0
     realtimeReflectionProbes: 0
-    billboardsFaceCameraPosition: 0
+    billboardsFaceCameraPosition: 1
     useLegacyDetailDistribution: 1
     adaptiveVsync: 0
     vSyncCount: 0
     realtimeGICPUUsage: 25
     adaptiveVsyncExtraA: 0
     adaptiveVsyncExtraB: 0
-    lodBias: 1
-    maximumLODLevel: 0
+    lodBias: 0.4
+    maximumLODLevel: 2
     enableLODCrossFade: 1
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
@@ -102,9 +102,9 @@ QualitySettings:
     customRenderPipeline: {fileID: 11400000, guid: b77f7dd012d9cf0488799cb01b7004e1, type: 2}
     terrainQualityOverrides: 12
     terrainPixelError: 1
-    terrainDetailDensityScale: 0.3
+    terrainDetailDensityScale: 0.1
     terrainBasemapDistance: 1000
-    terrainDetailDistance: 15
+    terrainDetailDistance: 40
     terrainTreeDistance: 5000
     terrainBillboardStart: 50
     terrainFadeLength: 5

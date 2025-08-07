@@ -7620,41 +7620,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 285548968471636139, guid: a0fb9bcc60e6f9c449a8a8a379f3ee61, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 801237462077708126, guid: a0fb9bcc60e6f9c449a8a8a379f3ee61, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 995326101450450718, guid: a0fb9bcc60e6f9c449a8a8a379f3ee61, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1182763572406203342, guid: a0fb9bcc60e6f9c449a8a8a379f3ee61, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3218525710927352617, guid: a0fb9bcc60e6f9c449a8a8a379f3ee61, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5138014433697336606, guid: a0fb9bcc60e6f9c449a8a8a379f3ee61, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6290339222913338385, guid: a0fb9bcc60e6f9c449a8a8a379f3ee61, type: 3}
       propertyPath: m_Name
       value: Player Setup (FPV)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6290339222913338385, guid: a0fb9bcc60e6f9c449a8a8a379f3ee61, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7044411695806268847, guid: a0fb9bcc60e6f9c449a8a8a379f3ee61, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7989078610241643352, guid: a0fb9bcc60e6f9c449a8a8a379f3ee61, type: 3}
       propertyPath: m_LocalPosition.x

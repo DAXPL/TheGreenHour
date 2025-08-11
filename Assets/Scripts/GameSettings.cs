@@ -1,3 +1,4 @@
+
 using System.IO;
 using UnityEngine;
 
@@ -63,5 +64,6 @@ namespace GreenHour.GameSettings
         public float SmellIntensity = 1.0f;
         public bool enableImmersionGiver = false;
         public bool enableImmersionReader = false;
+        public string selectedMicrophone = "";
     }
 }

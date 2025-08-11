@@ -14,10 +14,9 @@ namespace GreenHour.Electonics
         private CancellationTokenSource reconnectTokenSource;
         private readonly object wsLock = new object();
         private bool wasConnected = false;
-
+        private SensorData currentReadings;
         private void Start()
         {
-            // Wczytaj ustawienie z PlayerPrefs (domyœlnie w³¹czone jeœli brak zapisu)
             enableImmersionReader = GameSettings.GameSettings.CurrentSettings.enableImmersionReader;
             ToggleImmersionReader(enableImmersionReader);
         }
@@ -106,13 +105,17 @@ namespace GreenHour.Electonics
         {
             try
             {
-                SensorData data = JsonUtility.FromJson<SensorData>(e.Data);
-                Debug.Log($"Temperatura: {data.Temp}°C, GSR: {data.GSR}, HR: {data.HR}, SPO2: {data.SPO}");
+                currentReadings = JsonUtility.FromJson<SensorData>(e.Data);
             }
             catch (Exception ex)
             {
                 Debug.LogWarning($"Failed to parse sensor data: {ex.Message}");
             }
+        }
+
+        public SensorData GetReadings()
+        {
+            return currentReadings;
         }
     }
 

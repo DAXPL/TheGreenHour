@@ -1,3 +1,6 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using WebSocketSharp;
 
@@ -5,26 +8,114 @@ namespace GreenHour.Electonics
 {
     public class ImmersionReaderController : MonoBehaviour
     {
+        private bool enableImmersionReader = true;
+
         private WebSocket ws;
-        void Start()
+        private CancellationTokenSource reconnectTokenSource;
+        private readonly object wsLock = new object();
+        private bool wasConnected = false;
+
+        private void Start()
         {
-            ws = new WebSocket("ws://ImmersionReader.local:81");
-            ws.OnMessage += OnMessageReceived;
-            ws.Connect();
+            // Wczytaj ustawienie z PlayerPrefs (domyœlnie w³¹czone jeœli brak zapisu)
+            enableImmersionReader = GameSettings.GameSettings.CurrentSettings.enableImmersionReader;
+            ToggleImmersionReader(enableImmersionReader);
         }
 
-        void OnMessageReceived(object sender, MessageEventArgs e)
+        private void OnDestroy()
         {
-            SensorData data = JsonUtility.FromJson<SensorData>(e.Data);
-            Debug.Log($"Temperatura: {data.Temp}°C, GSR: {data.GSR}, HR: {data.HR}, SPO2: {data.SPO}");
+            reconnectTokenSource?.Cancel();
+            lock (wsLock)
+            {
+                if (ws != null && ws.IsAlive)
+                    ws.Close();
+            }
         }
 
-        void OnDestroy()
+        public void ToggleImmersionReader(bool newState)
         {
-            if (ws != null && ws.IsAlive)
-                ws.Close();
+            enableImmersionReader = newState;
+            GameSettings.GameSettings.CurrentSettings.enableImmersionReader = newState;
+
+            if (enableImmersionReader)
+            {
+                Debug.Log("ImmersionReader enabled – starting connection loop.");
+                reconnectTokenSource = new CancellationTokenSource();
+                Task.Run(() => ConnectLoop(reconnectTokenSource.Token));
+            }
+            else
+            {
+                Debug.Log("ImmersionReader disabled – closing connection.");
+                reconnectTokenSource?.Cancel();
+                lock (wsLock)
+                {
+                    if (ws != null && ws.IsAlive)
+                        ws.Close();
+                }
+            }
+        }
+
+        private void ConnectLoop(CancellationToken token)
+        {
+            while (!token.IsCancellationRequested)
+            {
+                lock (wsLock)
+                {
+                    if (ws == null || !ws.IsAlive)
+                    {
+                        try
+                        {
+                            ws = new WebSocket("ws://ImmersionReader.local:81");
+                            ws.OnMessage += OnMessageReceived;
+
+                            ws.OnOpen += (s, e) =>
+                            {
+                                wasConnected = true;
+                                Debug.Log("Connected to ImmersionReader");
+                            };
+
+                            ws.OnClose += (s, e) =>
+                            {
+                                if (wasConnected)
+                                    Debug.LogWarning("ImmersionReader connection closed");
+                                wasConnected = false;
+                            };
+
+                            ws.OnError += (s, e) =>
+                            {
+                                if (wasConnected)
+                                    Debug.LogWarning($"ImmersionReader error: {e.Message}");
+                            };
+
+                            ws.Connect();
+                        }
+                        catch (Exception ex)
+                        {
+                            if (wasConnected)
+                                Debug.LogWarning($"ImmersionReader connection failed: {ex.Message}");
+                            wasConnected = false;
+                        }
+                    }
+                }
+
+                Thread.Sleep(wasConnected ? 10000 : 20000);
+            }
+        }
+
+        private void OnMessageReceived(object sender, MessageEventArgs e)
+        {
+            try
+            {
+                SensorData data = JsonUtility.FromJson<SensorData>(e.Data);
+                Debug.Log($"Temperatura: {data.Temp}°C, GSR: {data.GSR}, HR: {data.HR}, SPO2: {data.SPO}");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"Failed to parse sensor data: {ex.Message}");
+            }
         }
     }
+
     [System.Serializable]
     public class SensorData
     {

@@ -1,3 +1,4 @@
+
 using System.IO;
 using UnityEngine;
 
@@ -34,6 +35,7 @@ namespace GreenHour.GameSettings
                 _currentSettings = new Settings();
                 SaveSettings();
             }
+            Debug.Log($"{SettingsFilePath}");
         }
 
         public static void SaveSettings()
@@ -59,5 +61,9 @@ namespace GreenHour.GameSettings
         public int ScreenWidth = 1920;
         public int ScreenHeight = 1080;
         public int GraphicsQuality = 2;
+        public float SmellIntensity = 1.0f;
+        public bool enableImmersionGiver = false;
+        public bool enableImmersionReader = false;
+        public string selectedMicrophone = "";
     }
 }

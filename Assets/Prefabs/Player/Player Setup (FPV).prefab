@@ -422,6 +422,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6026862221051428526}
     - target: {fileID: 2420509135092188987, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
+      propertyPath: pushForce
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420509135092188987, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
       propertyPath: standingHeight
       value: 1.7
       objectReference: {fileID: 0}

@@ -29,6 +29,8 @@ namespace GreenHour.Player
         [SerializeField] private float crouchHeight = 1f;
         [SerializeField] private float standingHeight = 2f;
         [SerializeField] private float crouchSpeed = 2.5f;
+        [Space]
+        [SerializeField] private float pushForce = 0.001f;
         
         private AudioSource audioSource;
 
@@ -45,6 +47,8 @@ namespace GreenHour.Player
 
         private float stepLen = 0.0f;
         private float airborneTime = 0f;
+
+        private Vector3 playerPhysicsVelocity;
 
         private void Awake()
         {
@@ -149,6 +153,26 @@ namespace GreenHour.Player
             move.y = verticalVelocity;
             wasGrounded = characterController.isGrounded;
             characterController.Move(move * Time.deltaTime);
+
+            playerPhysicsVelocity = new Vector3(move.x, 0, move.z) / Time.deltaTime;
+        }
+
+        void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            Rigidbody rb = hit.collider.attachedRigidbody;
+            
+            if (rb == null || rb.isKinematic) return;
+
+            // We dont want to push objects below us
+            if (hit.moveDirection.y < -0.3) return;
+
+
+            Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+
+            float speedFactor = playerPhysicsVelocity.magnitude;
+            float pushStrength = pushForce * speedFactor;
+
+            rb.AddForce(pushDir * pushStrength, ForceMode.Impulse);
         }
 
         private void HandleLook()

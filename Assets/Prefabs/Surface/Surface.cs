@@ -27,13 +27,13 @@ namespace GreenHour.PhysicsSurface
         {
             if (surfaceData == null) return;
             if (collision.relativeVelocity.magnitude < 0.5f) return;
-            AudioClip clip = this.GetLandingSound();
-            if(clip != null)
-            {
-                float volume = Mathf.InverseLerp(1.0f, 10f, collision.relativeVelocity.magnitude)*2.0f;
-                AudioSource.PlayClipAtPoint(clip, collision.contacts[0].point, volume);
-            }
-
+            float volume = Mathf.InverseLerp(1.0f, 10f, collision.relativeVelocity.magnitude) * 2.0f;
+            PlayHitSound(volume, collision.contacts[0].point);
         }
+        public void PlayHitSound(float volume, Vector3 position)
+        {
+            this.surfaceData.PlayHitSound(volume, position);
+        }
+
     }
 }

@@ -43,5 +43,12 @@ namespace GreenHour.PhysicsSurface
             get => surfaceName;
             set => surfaceName = value;
         }
+
+        public void PlayHitSound(float volume, Vector3 position)
+        {
+            AudioClip clip = GetLandingSound();
+            if (clip == null) return;
+            AudioSource.PlayClipAtPoint(clip, position, volume);
+        }
     }
 }

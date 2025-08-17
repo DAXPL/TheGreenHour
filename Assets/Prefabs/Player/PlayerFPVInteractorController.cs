@@ -1,10 +1,12 @@
 using GreenHour.Interactions;
+using GreenHour.PhysicsSurface;
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
-using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 namespace GreenHour.Player
 {
     public class PlayerFPVInteractorController : MonoBehaviour
@@ -14,16 +16,18 @@ namespace GreenHour.Player
         [Header("Key bindings")]
         [SerializeField] private InputActionReference primaryActionReference;
         [SerializeField] private InputActionReference secondaryActionReference;
+        [SerializeField] private InputActionReference interactionActionReference;
         [SerializeField] private InputActionReference menuActionReference;
         [Header("Interaction settings")]
         [SerializeField] private float actionRange = 5.0f;
         [SerializeField] private LayerMask actionMask;
+        [SerializeField] private float pushForce = 100.0f;
+        [SerializeField] private SurfaceData defaultSurfaceData;
         [Header("Interface")]
         [SerializeField] private Animator interactionAnimator;
         [Header("Grabbing")]
         [SerializeField] private XRDirectInteractor grabOrigin;
         private XRGrabInteractable grabbedInteractable;
-        private FixedJoint grabJoint;
         [Header("UI")]
         [SerializeField] private GameObject interactionUI;
 
@@ -37,7 +41,11 @@ namespace GreenHour.Player
             if (secondaryActionReference)
             {
                 secondaryActionReference.action.started += OnSecondaryAction;
-                secondaryActionReference.action.canceled += OnSecondaryActionCanceled;
+            }
+            if (interactionActionReference)
+            {
+                interactionActionReference.action.started += OnInteractionAction;
+                interactionActionReference.action.canceled += OnInteractionActionCanceled;
             }
             if(menuActionReference)
             {
@@ -61,13 +69,35 @@ namespace GreenHour.Player
         
         private void OnPrimaryAction(InputAction.CallbackContext context)
         {
-            GameObject go = GetGameobject();
+            GameObject go = GetGameobject(out Vector3 hitpoint);
             if (go != null && go.TryGetComponent(out XRGrabInteractable xrGrab))
             {
                 Grab(xrGrab);
             }  
         }
         private void OnSecondaryAction(InputAction.CallbackContext context)
+        {
+            GameObject go = GetGameobject(out Vector3 hitpoint);
+            if(go == null)  return;
+            if (!go.TryGetComponent(out Rigidbody rb)) return;
+            if (rb.isKinematic) return;
+
+            //Adding force
+            Vector3 angle = (hitpoint - playerCamera.transform.position).normalized;
+            rb.AddForceAtPosition(angle * pushForce, hitpoint);
+
+            //Sound effect based on surface
+            if(go.TryGetComponent(out Surface surface))
+            {
+                surface.PlayHitSound(angle.magnitude, hitpoint);
+            }
+            else if(defaultSurfaceData)
+            {
+                defaultSurfaceData.PlayHitSound(angle.magnitude, hitpoint);
+            }
+                
+        }
+        private void OnInteractionAction(InputAction.CallbackContext context)
         {
             Interactor i = GetInteractor();
             if (i != null)
@@ -77,12 +107,11 @@ namespace GreenHour.Player
                 return;
             }
         }
-
         private void OnPrimaryActionCanceled(InputAction.CallbackContext context)
         {
             Release();
         }
-        private void OnSecondaryActionCanceled(InputAction.CallbackContext context)
+        private void OnInteractionActionCanceled(InputAction.CallbackContext context)
         {
             if (interactor != null)
             {
@@ -123,9 +152,10 @@ namespace GreenHour.Player
             return i;
         }
         
-        private GameObject GetGameobject()
+        private GameObject GetGameobject(out Vector3 hitPoint)
         {
             RaycastHit hit;
+            hitPoint = Vector3.zero;
             Transform origin = playerCamera ? playerCamera.transform : this.transform;
             if (!Physics.Raycast(origin.position, origin.forward, out hit, actionRange, actionMask))
             {
@@ -135,6 +165,7 @@ namespace GreenHour.Player
             else
             {
                 Debug.DrawRay(origin.position, origin.TransformDirection(Vector3.forward) * hit.distance, Color.green, 1.0f);
+                hitPoint = hit.point;
                 return hit.collider.gameObject;
             }
         }

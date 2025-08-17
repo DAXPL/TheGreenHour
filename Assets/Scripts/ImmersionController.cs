@@ -15,7 +15,8 @@ namespace GreenHour.Immersion
         private AudioClip micClip;
 
         private float volume;
-        private SensorData sensorsReadings;
+        public static PlayerImmersionData immersionData = new PlayerImmersionData();
+
         private void Awake()
         {
             immersionReaderController = GetComponent<ImmersionReaderController>();
@@ -62,7 +63,7 @@ namespace GreenHour.Immersion
                 return;
 
             volume = GetRMSLevel();
-            if (immersionReaderController) sensorsReadings = immersionReaderController.GetReadings();
+            if (immersionReaderController) immersionData.sensorData = immersionReaderController.GetReadings();
         }
 
         private float GetRMSLevel()
@@ -79,5 +80,17 @@ namespace GreenHour.Immersion
             return Mathf.Sqrt(sum / sampleWindow);
         }
 
+    }
+    [System.Serializable]
+    public class PlayerImmersionData
+    {
+        public SensorData sensorData;
+        public float RMS;
+
+        public PlayerImmersionData()
+        {
+            sensorData = new SensorData();
+            RMS = 0;
+        }
     }
 }

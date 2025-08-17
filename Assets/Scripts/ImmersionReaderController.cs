@@ -122,9 +122,9 @@ namespace GreenHour.Electonics
     [System.Serializable]
     public class SensorData
     {
-        public float Temp;
-        public int GSR;
-        public int HR;
-        public int SPO;
+        public float Temp=0;
+        public int GSR=0;
+        public int HR=0;
+        public int SPO=0;
     }
 }

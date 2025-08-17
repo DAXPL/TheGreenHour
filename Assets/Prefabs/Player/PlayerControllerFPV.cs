@@ -96,7 +96,6 @@ namespace GreenHour.Player
         {
             HandleMovement();
             HandleLook();
-            HandleCrouchTransition();
         }
 
         private void OnMove(InputAction.CallbackContext context)
@@ -112,7 +111,17 @@ namespace GreenHour.Player
 
         private void OnCrouch(InputAction.CallbackContext context)
         {
-            isCrouching = !isCrouching;
+            if (!isCrouching)
+            {
+                isCrouching = true;
+                ApplyCrouchHeight();
+                return;
+            }
+            else if (CanStandUp())
+            {
+                isCrouching = false;
+                ApplyCrouchHeight();
+            }
         }
 
         private void HandleMovement()
@@ -189,25 +198,26 @@ namespace GreenHour.Player
             transform.Rotate(Vector3.up * mouseX);
         }
 
-        private void HandleCrouchTransition()
+        private void ApplyCrouchHeight()
         {
             float targetHeight = isCrouching ? crouchHeight : standingHeight;
-
-            if (!isCrouching)
-            {
-                Vector3 top = transform.position + Vector3.up * (characterController.height / 2);
-                if (Physics.SphereCast(top, characterController.radius * 0.9f, Vector3.up, out RaycastHit hit, standingHeight - crouchHeight))
-                {
-                    targetHeight = crouchHeight;
-                }
-            }
-
             characterController.height = targetHeight;
-            characterController.center = new Vector3(0, targetHeight / 2, 0);
-            if (playerCamera) playerCamera.transform.localPosition = new Vector3(0, targetHeight * 0.75f, 0);
+            characterController.center = new Vector3(0, targetHeight / 2f, 0);
+
+            if (playerCamera)
+                playerCamera.transform.localPosition = new Vector3(0, targetHeight * 0.75f, 0);
         }
 
-        
+        private bool CanStandUp()
+        {
+            Vector3 bottom = transform.position;
+            Vector3 top = bottom + Vector3.up * standingHeight;
+            bottom.y = bottom.y + 0.1f; //To ignore ground
+
+            return !Physics.CheckCapsule(bottom, top, characterController.radius/2, walkingMask);
+        }
+
+
         private void PlaySound(SoundType type, float volumeScale=1.0f, float pitchScale = 1.0f)
         {
             if (audioSource == null) return;

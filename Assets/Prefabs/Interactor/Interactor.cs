@@ -41,5 +41,10 @@ namespace GreenHour.Interactions
             activationTimer += Time.deltaTime;
             if (activationTimer >= activationTime) InteractionSucceed();
         }
+        public float InteractionProgress()
+        {
+            if(!isInInteraction) return 0.0f;
+            return activationTimer / activationTime;
+        }
     }
 }

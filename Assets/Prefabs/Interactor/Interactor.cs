@@ -17,7 +17,6 @@ namespace GreenHour.Interactions
             isInInteraction = true;
             activationTimer = 0;
             OnStartInteraction.Invoke();
-            Debug.Log($"Started interacton {this.name}");
         }
 
         public void StopInteraction()
@@ -26,7 +25,6 @@ namespace GreenHour.Interactions
             isInInteraction = false;
             activationTimer = 0;
             OnStopInteraction.Invoke();
-            Debug.Log($"Ended interacton {this.name}");
         }
 
         private void InteractionSucceed()

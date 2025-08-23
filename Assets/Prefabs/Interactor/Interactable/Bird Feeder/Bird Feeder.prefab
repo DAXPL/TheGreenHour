@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6164124486747792174}
   - component: {fileID: 785022264433520041}
-  - component: {fileID: 4617593670271669228}
+  - component: {fileID: 6330020749757795696}
   m_Layer: 0
   m_Name: Bird Feeder
   m_TagString: Untagged
@@ -55,7 +55,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.58, y: 0.39, z: 0.46}
   m_Center: {x: 0, y: 0.18, z: 0}
---- !u!114 &4617593670271669228
+--- !u!114 &6330020749757795696
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 515747129140153996}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 637c631f5d18dbf46b5e2e8a02394d79, type: 3}
+  m_Script: {fileID: 11500000, guid: 83c3559a9ebf865438cc481c3debb37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   results:
@@ -87,7 +87,8 @@ MonoBehaviour:
   OnActionResulted:
     m_PersistentCalls:
       m_Calls: []
-  nameTag: '[SEED]'
+  wantedItems:
+  - {fileID: 11400000, guid: 3082e32bdf525724e893339d68545155, type: 2}
 --- !u!1 &3034957561894769187
 GameObject:
   m_ObjectHideFlags: 0

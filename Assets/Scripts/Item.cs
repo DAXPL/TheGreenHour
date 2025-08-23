@@ -7,6 +7,7 @@ namespace GreenHour.Interactions.Items
     [RequireComponent(typeof(XRGrabInteractable))]
     public class Item : MonoBehaviour
     {
+        [SerializeField] private ItemData data;
         [SerializeField] private UnityEvent OnUsed;
         [SerializeField] private UnityEvent<bool> OnToggled;
         bool toggled = false;
@@ -31,5 +32,10 @@ namespace GreenHour.Interactions.Items
             toggled = !toggled;
             OnToggled.Invoke(toggled);
         }
+        public ItemData GetData() 
+        {
+            return data;
+        }
+
     }
 }

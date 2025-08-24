@@ -32,6 +32,10 @@ namespace GreenHour.Interactions
             StopInteraction();
             OnInteractionSuccess.Invoke();
         }
+        public void ActivateAction()
+        {
+            OnInteractionSuccess.Invoke();
+        }
 
         private void Update()
         {

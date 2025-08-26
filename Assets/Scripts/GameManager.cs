@@ -46,15 +46,17 @@ namespace GreenHour.Gameplay
             int presenceAmount = 1; //Because everyday increasing
             int safetyAmount = 0;
             Action[] actions = FindObjectsByType<Action>(FindObjectsSortMode.None);
-            Debug.Log(actions.Length);
+            int actionsTaken = 0;
             foreach (Action action in actions)
             {
-                if(!action.GetPenalty(currentEntity, out int presencePenalty, out int safetyPenalty)) continue;
+                if(action.enabled == false) continue;
+                actionsTaken++;
+                if (!action.GetPenalty(currentEntity, out int presencePenalty, out int safetyPenalty)) continue;
                 presenceAmount += presencePenalty;
                 safetyAmount += safetyPenalty;
                 action.LockAction();
             }
-
+            Debug.Log($"Taken actions: {actionsTaken}, presence += {presenceAmount}, safety += {safetyAmount}");
             currentEntity.IncreaseLevels(presenceAmount, safetyAmount);
 
             if (currentEntity.WantsToEscape())

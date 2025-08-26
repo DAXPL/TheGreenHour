@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 744649931315819872}
   - component: {fileID: 2001222874691470746}
   - component: {fileID: -8163814470862962153}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sunflower
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}

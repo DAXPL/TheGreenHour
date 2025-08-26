@@ -26,6 +26,7 @@ namespace GreenHour.Interactions.Items
         {
             OnUse();
         }
+        [ContextMenu("Use")]
         public void OnUse()
         {
             OnUsed.Invoke();

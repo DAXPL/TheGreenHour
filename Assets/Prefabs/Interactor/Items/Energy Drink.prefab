@@ -53,6 +53,10 @@ PrefabInstance:
       value: Energy Drink
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8674d9adc1096154daf84fd840b1edc3, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8674d9adc1096154daf84fd840b1edc3, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}

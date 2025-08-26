@@ -12,7 +12,7 @@ namespace GreenHour.Gameplay.Surveillance
         private RenderTexture surveillanceTexture;
         private void Start()
         {
-            surveillanceTexture = new RenderTexture(400, 300, 32, RenderTextureFormat.R8);
+            surveillanceTexture = new RenderTexture(400, 300, 32);
             if (outputImage != null)
             {
                 outputImage.material.mainTexture = surveillanceTexture;

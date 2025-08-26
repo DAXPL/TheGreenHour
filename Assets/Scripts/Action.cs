@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
+using static GreenHour.Gameplay.Entity;
 
 namespace GreenHour.Gameplay
 {
@@ -9,6 +9,7 @@ namespace GreenHour.Gameplay
     {
         [SerializeField] protected List<ActionResult> results = new List<ActionResult> ();
         [SerializeField] protected bool singleUse = true;
+        [SerializeField] protected PresenceLevel minimalPresenceLevel = PresenceLevel.None;
         public UnityEvent SetupAction;
         public UnityEvent OnActionTaken;
         public UnityEvent OnActionResulted;

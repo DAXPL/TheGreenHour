@@ -6,9 +6,12 @@ namespace GreenHour.Gameplay
     public class Entity : ScriptableObject
     {
         [SerializeField] public string EntityName;
+        [SerializeField] public AudioClip[] recordedSounds;
+        private int presenceLevel = 0;
+        private int safetyLevel = 0;
+        private const int maxPresence = 10;
 
-        int presenceLevel = 0;
-        int safetyLevel = 0;
+        public enum PresenceLevel { None, Low, Medium, High }
 
         public void IncreaseLevels(int presenceAmount, int safetyLevel)
         {
@@ -19,6 +22,26 @@ namespace GreenHour.Gameplay
         public bool WantsToEscape()
         {
             return presenceLevel>safetyLevel;
+        }
+
+        public PresenceLevel GetPresenceLevel()
+        {
+            if(presenceLevel == 0)
+            {
+                return PresenceLevel.None;
+            }
+            else if (presenceLevel <= (maxPresence*(1/3)))
+            {
+                return PresenceLevel.Low;
+            }
+            else if (presenceLevel <= (maxPresence * (2 / 3)))
+            {
+                return PresenceLevel.Medium;
+            }
+            else
+            {
+                return PresenceLevel.High;
+            }
         }
     }
 }

@@ -490,18 +490,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7989078610241643352}
     m_Modifications:
-    - target: {fileID: 933354933373089632, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 933354933373089632, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 933354933373089632, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.34
-      objectReference: {fileID: 0}
     - target: {fileID: 1611327557663127772, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
       propertyPath: interactionUI
       value: 
@@ -514,10 +502,6 @@ PrefabInstance:
       propertyPath: interactionAnimator
       value: 
       objectReference: {fileID: 6026862221051428526}
-    - target: {fileID: 4411815289124090111, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
-      propertyPath: m_Radius
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 4433318664393792370, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
       propertyPath: m_Name
       value: Player (FPV)

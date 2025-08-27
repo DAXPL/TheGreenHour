@@ -1,4 +1,5 @@
 using GreenHour.Enviroment;
+using GreenHour.Gameplay.Events;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace GreenHour.Gameplay
         [Header("General")]
         [SerializeField] private List<Entity> entities = new List<Entity>();
         [SerializeField] private Entity currentEntity;
+        [SerializeField] private List<GameEvent> randomEvents;
         private int day = 0;
         private void Awake()
         {
@@ -58,7 +60,11 @@ namespace GreenHour.Gameplay
             }
             Debug.Log($"Taken actions: {actionsTaken}, presence += {presenceAmount}, safety += {safetyAmount}");
             currentEntity.IncreaseLevels(presenceAmount, safetyAmount);
-
+            currentEntity.TakeActions();
+            foreach(GameEvent ev in randomEvents)
+            {
+                if(Random.Range(0,10)>6.0f) ev.Raise();
+            }
             if (currentEntity.WantsToEscape())
             {
                 Debug.LogWarning("Entity wants to escape");

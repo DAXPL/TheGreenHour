@@ -23,8 +23,6 @@ namespace GreenHour.Gameplay
             if (entity.GetPresenceLevel() < minimalPresenceLevel) return false;
 
             if (entity.recordedSounds.Length>0) recording = entity.recordedSounds[Random.Range(0, entity.recordedSounds.Length)];
-            actionAvailable = false;
-            actionTaken = false;
             if(audioSource) audioSource.clip = recording;
             return true;
         }

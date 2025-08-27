@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Events;
 namespace GreenHour.Gameplay.Surveillance
 {
     public class SurveillanceSystem : MonoBehaviour
@@ -8,8 +9,12 @@ namespace GreenHour.Gameplay.Surveillance
         [SerializeField] private SurveillanceCamera[] cameras;
         [SerializeField] private MeshRenderer outputImage;
         [SerializeField] private float framerate = 8;
-        private int currentCamera = -1;
+        [Space]
+        [SerializeField] private SurveillanceEffect[] effects;
+        private int currentCamera = 0;
         private RenderTexture surveillanceTexture;
+        private bool renderCameras = false;
+        private bool nvrActive = false;
         private void Start()
         {
             surveillanceTexture = new RenderTexture(400, 300, 32);
@@ -39,9 +44,46 @@ namespace GreenHour.Gameplay.Surveillance
         {
             while (true) 
             {
-                if (currentCamera >= 0 && currentCamera < cameras.Length && cameras[currentCamera] != null) cameras[currentCamera].RenderCamera(surveillanceTexture);
+                if (renderCameras && nvrActive && currentCamera >= 0 && currentCamera < cameras.Length && cameras[currentCamera] != null) cameras[currentCamera].RenderCamera(surveillanceTexture);
                 yield return new WaitForSeconds(1.0f/framerate);
             }
+        }
+        public void ShowImage(Entity entity)
+        {
+            foreach(var s in effects)
+            {
+                if(s.entity != entity) continue;
+                s.onShow.Invoke();
+                return;
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                renderCameras = true;
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                renderCameras = false;
+            }
+        }
+
+        public void SetNVR(bool state)
+        {
+            nvrActive = state;
+        }
+
+        [System.Serializable]
+        private class SurveillanceEffect
+        {
+            public Entity entity;
+            public UnityEvent onShow;
         }
     }
 }

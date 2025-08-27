@@ -148,7 +148,7 @@ namespace GreenHour.Player
         private void Update()
         {
             Interactor i = GetInteractor(out Item item);
-            interactionAnimator?.SetBool("isActive", (i != null || item != null));
+            interactionAnimator?.SetBool("isActive", (i != null && i.enabled != false || item != null && item.enabled != false));
 
             if (interactor == null)
             {

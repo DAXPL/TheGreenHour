@@ -7,6 +7,7 @@ namespace GreenHour.Gameplay
     {
         [SerializeField] public string EntityName;
         [SerializeField] public AudioClip[] recordedSounds;
+        [SerializeField] public Sprite[] recordedImages;
         private int presenceLevel = 0;
         private int safetyLevel = 0;
         private const int maxPresence = 10;

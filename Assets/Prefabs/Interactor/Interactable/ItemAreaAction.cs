@@ -4,8 +4,9 @@ namespace GreenHour.Gameplay
 {
     public class ItemAreaAction : Action
     {
-        [SerializeField] private ItemData[] wantedItems;
         [SerializeField] private int wantedCount = 1;
+        [SerializeField] private ItemData[] wantedItems;
+
         private BoxCollider collider;
 
         public override void Start()

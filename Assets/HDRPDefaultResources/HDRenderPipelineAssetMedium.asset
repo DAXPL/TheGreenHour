@@ -29,7 +29,7 @@ MonoBehaviour:
         m_Id: With3Levels
     supportVolumetrics: 1
     supportVolumetricClouds: 0
-    supportLightLayers: 0
+    supportLightLayers: 1
     renderingLayerMaskBuffer: 0
     supportWater: 1
     waterSimulationResolution: 128
@@ -46,7 +46,7 @@ MonoBehaviour:
       m_Bits: 0
     supportDistortion: 1
     supportTransparentBackface: 1
-    supportTransparentDepthPrepass: 1
+    supportTransparentDepthPrepass: 0
     supportTransparentDepthPostpass: 1
     colorBufferFormat: 74
     supportCustomPass: 1
@@ -72,7 +72,7 @@ MonoBehaviour:
     supportDataDrivenLensFlare: 1
     supportDitheringCrossFade: 0
     supportRuntimeAOVAPI: 0
-    supportTerrainHole: 0
+    supportTerrainHole: 1
     lightProbeSystem: 1
     oldLightProbeSystem: 0
     probeVolumeMemoryBudget: 1024
@@ -176,7 +176,7 @@ MonoBehaviour:
       FSR2EnableSharpness: 0
       FSR2Sharpness: 0
       FSR2UseOptimalSettings: 0
-      FSR2QualitySetting: 0
+      FSR2QualitySetting: 1
       FSR2InjectionPoint: 0
       fsrOverrideSharpness: 0
       fsrSharpness: 0.92

@@ -17,6 +17,9 @@ MonoBehaviour:
     scatteringDistanceMultiplier: 0.74310976
     transmissionTint: {r: 4.237095, g: 4.237095, b: 4.237095, a: 1}
     texturingMode: 0
+    smoothnessMultipliers: {x: 1, y: 1}
+    lobeMix: 0.5
+    diffuseShadingPower: 1
     transmissionMode: 1
     thicknessRemap: {x: 0, y: 5}
     worldScale: 1

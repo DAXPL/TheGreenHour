@@ -29,6 +29,8 @@ namespace GreenHour.Player
         [SerializeField] private float crouchHeight = 1f;
         [SerializeField] private float standingHeight = 2f;
         [SerializeField] private float crouchSpeed = 2.5f;
+        [Space]
+        [SerializeField] private float pushForce = 0.001f;
         
         private AudioSource audioSource;
 
@@ -45,6 +47,8 @@ namespace GreenHour.Player
 
         private float stepLen = 0.0f;
         private float airborneTime = 0f;
+
+        private Vector3 playerPhysicsVelocity;
 
         private void Awake()
         {
@@ -92,7 +96,6 @@ namespace GreenHour.Player
         {
             HandleMovement();
             HandleLook();
-            HandleCrouchTransition();
         }
 
         private void OnMove(InputAction.CallbackContext context)
@@ -108,7 +111,17 @@ namespace GreenHour.Player
 
         private void OnCrouch(InputAction.CallbackContext context)
         {
-            isCrouching = !isCrouching;
+            if (!isCrouching)
+            {
+                isCrouching = true;
+                ApplyCrouchHeight();
+                return;
+            }
+            else if (CanStandUp())
+            {
+                isCrouching = false;
+                ApplyCrouchHeight();
+            }
         }
 
         private void HandleMovement()
@@ -149,6 +162,26 @@ namespace GreenHour.Player
             move.y = verticalVelocity;
             wasGrounded = characterController.isGrounded;
             characterController.Move(move * Time.deltaTime);
+
+            playerPhysicsVelocity = new Vector3(move.x, 0, move.z) / Time.deltaTime;
+        }
+
+        void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            Rigidbody rb = hit.collider.attachedRigidbody;
+            
+            if (rb == null || rb.isKinematic) return;
+
+            // We dont want to push objects below us
+            if (hit.moveDirection.y < -0.3) return;
+
+
+            Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+
+            float speedFactor = playerPhysicsVelocity.magnitude;
+            float pushStrength = pushForce * speedFactor;
+
+            rb.AddForce(pushDir * pushStrength, ForceMode.Impulse);
         }
 
         private void HandleLook()
@@ -165,25 +198,26 @@ namespace GreenHour.Player
             transform.Rotate(Vector3.up * mouseX);
         }
 
-        private void HandleCrouchTransition()
+        private void ApplyCrouchHeight()
         {
             float targetHeight = isCrouching ? crouchHeight : standingHeight;
-
-            if (!isCrouching)
-            {
-                Vector3 top = transform.position + Vector3.up * (characterController.height / 2);
-                if (Physics.SphereCast(top, characterController.radius * 0.9f, Vector3.up, out RaycastHit hit, standingHeight - crouchHeight))
-                {
-                    targetHeight = crouchHeight;
-                }
-            }
-
             characterController.height = targetHeight;
-            characterController.center = new Vector3(0, targetHeight / 2, 0);
-            if (playerCamera) playerCamera.transform.localPosition = new Vector3(0, targetHeight * 0.75f, 0);
+            characterController.center = new Vector3(0, targetHeight / 2f, 0);
+
+            if (playerCamera)
+                playerCamera.transform.localPosition = new Vector3(0, targetHeight * 0.75f, 0);
         }
 
-        
+        private bool CanStandUp()
+        {
+            Vector3 bottom = transform.position;
+            Vector3 top = bottom + Vector3.up * standingHeight;
+            bottom.y = bottom.y + 0.1f; //To ignore ground
+
+            return !Physics.CheckCapsule(bottom, top, characterController.radius/2, walkingMask);
+        }
+
+
         private void PlaySound(SoundType type, float volumeScale=1.0f, float pitchScale = 1.0f)
         {
             if (audioSource == null) return;

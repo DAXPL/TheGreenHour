@@ -23,8 +23,8 @@ TagManager:
   - PW_Object_Small
   - PW_Object_Medium
   - PW_Object_Large
-  - 
-  - 
+  - Items
+  - Player
   - 
   - 
   - 
@@ -49,3 +49,4 @@ TagManager:
     locked: 0
   m_RenderingLayers:
   - Default
+  - UV

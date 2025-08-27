@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1196655677543773083}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1634, y: -0.034, z: 0.396}
+  m_LocalPosition: {x: 0.2, y: -0.21, z: 0.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -224,7 +224,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.7
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -242,10 +242,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d78fbb5d3371a3459abb5b1638e9c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 336904851395747443}
   moveReference: {fileID: -1680190386980627800, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   lookReference: {fileID: -5630151704836100654, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   crouchReference: {fileID: 7040659881675835329, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+  playerCamera: {fileID: 336904851395747443}
+  amplitude: 0.02
+  frequency: 0.125
   defaultSurfaceData: {fileID: 11400000, guid: bd53667b8aa17c34ba45013b94676ad0, type: 2}
   walkingMask:
     serializedVersion: 2
@@ -496,7 +498,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   volumeAnchorOverride: {fileID: 0}
-  antialiasing: 0
+  antialiasing: 2
   SMAAQuality: 2
   dithering: 0
   stopNaNs: 0

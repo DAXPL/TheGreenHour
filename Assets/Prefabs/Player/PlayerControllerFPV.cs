@@ -12,12 +12,19 @@ namespace GreenHour.Player
     [RequireComponent(typeof(AudioSource))]
     public class PlayerControllerFPV : MonoBehaviour
     {
-        [SerializeField] private Camera playerCamera;
+        
 
         [Header("Key Bindings")]
         [SerializeField] private InputActionReference moveReference;
         [SerializeField] private InputActionReference lookReference;
         [SerializeField] private InputActionReference crouchReference;
+
+        [Header("Player head")]
+        [SerializeField] private Camera playerCamera;
+        [SerializeField] private float amplitude = 0.05f; // wysokoœæ ruchu góra-dó³
+        [SerializeField] private float frequency = 8f;   // szybkoœæ oscylacji
+        private Vector3 startLocalPos;
+        private float bobTimer;
 
         [Header("Settings")]
         [SerializeField] private SurfaceData defaultSurfaceData;
@@ -54,6 +61,8 @@ namespace GreenHour.Player
         {
             characterController = GetComponent<CharacterController>();
             audioSource = GetComponent<AudioSource>();
+            if (playerCamera != null)
+                startLocalPos = playerCamera.transform.localPosition;
         }
 
         private void OnEnable()
@@ -96,6 +105,7 @@ namespace GreenHour.Player
         {
             HandleMovement();
             HandleLook();
+            HandleHeadBobbing();
         }
 
         private void OnMove(InputAction.CallbackContext context)
@@ -217,6 +227,28 @@ namespace GreenHour.Player
             return !Physics.CheckCapsule(bottom, top, characterController.radius/2, walkingMask);
         }
 
+        private void HandleHeadBobbing()
+        {
+            float speed = playerPhysicsVelocity.magnitude;
+
+            if (speed > 0.1f)
+            {
+                bobTimer += Time.deltaTime * frequency * (speed * 0.3f);
+                float bobOffsetY = Mathf.Sin(bobTimer) * amplitude;
+                float bobOffsetX = Mathf.Cos(bobTimer * 0.5f) * amplitude * 0.5f;
+
+                playerCamera.transform.localPosition = startLocalPos + new Vector3(bobOffsetX, bobOffsetY, 0);
+            }
+            else
+            {
+                bobTimer = 0f;
+                playerCamera.transform.localPosition = Vector3.Lerp(
+                    playerCamera.transform.localPosition,
+                    startLocalPos,
+                    Time.deltaTime * 5f
+                );
+            }
+        }
 
         private void PlaySound(SoundType type, float volumeScale=1.0f, float pitchScale = 1.0f)
         {

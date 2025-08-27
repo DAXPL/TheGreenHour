@@ -16,6 +16,7 @@ namespace GreenHour.Enviroment
         }
         [SerializeField] private GameObject SunPivot;
         [SerializeField] private float timescale = 1f;
+        [SerializeField] private float minAngle = 30f;
         [SerializeField] private float maxAngle = 185f;
         [SerializeField] private float dayDuration = 60f;
         [SerializeField] private AnimationCurve sunAngleCurve;
@@ -58,7 +59,7 @@ namespace GreenHour.Enviroment
 
             if (SunPivot)
             {
-                float sunAngle = sunAngleCurve.Evaluate(time)* maxAngle;
+                float sunAngle = Mathf.Lerp(minAngle, maxAngle, sunAngleCurve.Evaluate(time));
                 SunPivot.transform.localRotation = Quaternion.Euler(sunAngle, 0f, 0f);
             }
         }

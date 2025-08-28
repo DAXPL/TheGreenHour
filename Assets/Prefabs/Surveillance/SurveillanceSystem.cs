@@ -1,5 +1,5 @@
+using GreenHour.Interactions;
 using System.Collections;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
 namespace GreenHour.Gameplay.Surveillance
@@ -15,6 +15,10 @@ namespace GreenHour.Gameplay.Surveillance
         private RenderTexture surveillanceTexture;
         private bool renderCameras = false;
         private bool nvrActive = false;
+        [Space]
+        [SerializeField] private UnityEvent onFix;
+        [SerializeField] private UnityEvent onBroke;
+       
         private void Start()
         {
             surveillanceTexture = new RenderTexture(400, 300, 32);
@@ -73,11 +77,27 @@ namespace GreenHour.Gameplay.Surveillance
                 renderCameras = false;
             }
         }
-
-        public void SetNVR(bool state)
+       
+        [ContextMenu("Fix")]
+        public void Fix()
         {
-            nvrActive = state;
+            if(Breakers.breakersOn == false)
+            {
+                Debug.Log("No electricity!");
+                return;
+            }
+            nvrActive = true;
+            onFix.Invoke();
         }
+
+        [ContextMenu("Broke")]
+        public void Broke()
+        {
+            nvrActive = false;
+            onBroke.Invoke();
+        }
+
+
 
         [System.Serializable]
         private class SurveillanceEffect

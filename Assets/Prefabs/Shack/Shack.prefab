@@ -6994,6 +6994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activationTime: 0.5
+  activationPenalty: 0
   OnStartInteraction:
     m_PersistentCalls:
       m_Calls: []
@@ -9206,6 +9207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activationTime: 0.5
+  activationPenalty: 0
   OnStartInteraction:
     m_PersistentCalls:
       m_Calls: []
@@ -10623,7 +10625,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bc9989ccff49140ac5490cc2fc0288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activationTime: 10
+  activationTime: 5
+  activationPenalty: 0.2
   OnStartInteraction:
     m_PersistentCalls:
       m_Calls: []

@@ -19,6 +19,7 @@ namespace GreenHour.Enviroment
         [SerializeField] private float minAngle = 30f;
         [SerializeField] private float maxAngle = 185f;
         [SerializeField] private float dayDuration = 60f;
+        [SerializeField] private float fastForwartMultipiler = 4f;
         [SerializeField] private AnimationCurve sunAngleCurve;
         [Header("Events")]
         public UnityEvent OnDayStart;
@@ -31,6 +32,7 @@ namespace GreenHour.Enviroment
         private DayPhase currentPhase = DayPhase.Dawn;
 
         private float time = 0f;
+        private float penalty = 0;
         private bool timeIsAbleToFlow = true;
 
         private void Awake()
@@ -49,7 +51,15 @@ namespace GreenHour.Enviroment
         {
             if(timeIsAbleToFlow == false) return;
 
-            time += (Time.deltaTime / dayDuration) * timescale;
+            float timeflow = (Time.deltaTime / dayDuration) * timescale;
+            time += timeflow*((penalty>0)? fastForwartMultipiler:1.0f);
+
+            if (penalty > 0) 
+            {
+                Debug.Log("Fast forward");
+                penalty -= ((Time.deltaTime / dayDuration) * timescale) * fastForwartMultipiler;
+                if(penalty<0) penalty= 0;
+            }
 
             if (time >= 1f)
             {
@@ -111,6 +121,19 @@ namespace GreenHour.Enviroment
         public float GetTime()
         {
             return time;
+        }
+        public float GetInGameTime()
+        {
+            return Mathf.Lerp(7.0f,22.0f, time);
+        }
+
+        public void SetTimePenalty(float time)
+        {
+            penalty += time;
+        }
+        public bool IsFastForward()
+        {
+            return penalty > 0;
         }
     }
 }

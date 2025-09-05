@@ -1,3 +1,4 @@
+using GreenHour.Enviroment;
 using UnityEngine;
 using UnityEngine.Events;
 namespace GreenHour.Interactions
@@ -5,6 +6,7 @@ namespace GreenHour.Interactions
     public class Interactor : MonoBehaviour
     {
         [SerializeField] private float activationTime = 2.0f;
+        [SerializeField] private float activationPenalty = 0.0f;
         private float activationTimer = 0.0f;
         private bool isInInteraction = false;
         private bool toggled;
@@ -35,6 +37,7 @@ namespace GreenHour.Interactions
             OnInteractionSuccess.Invoke();
             toggled = !toggled;
             OnToggle.Invoke(toggled);
+            if(activationPenalty>0 && DayCycle.Instance != null) DayCycle.Instance.SetTimePenalty(activationPenalty);
         }
         public void ActivateAction()
         {

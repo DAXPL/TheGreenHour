@@ -39,17 +39,20 @@ namespace GreenHour.UI
         private void FixedUpdate()
         {
             if(dateTMP)dateTMP.SetText($"{System.DateTime.Now}");
+            
             if(resolutionTMP)resolutionTMP.SetText($"{Screen.height}P");
+            
             if (timeTMP)
             {
-                int totalSeconds = Mathf.FloorToInt(time);
-                int seconds = totalSeconds % 60;
-                int minutes = (totalSeconds / 60) % 60;
-                int hours = totalSeconds / 3600;
-                float gameTime = (DayCycle.Instance != null) ? DayCycle.Instance.GetInGameTime() : 0;
+                float gameTime = (DayCycle.Instance != null) ? DayCycle.Instance.GetInGameTime() : 0f;
+                float totalHours = 6f + gameTime * 16f;
 
-                timeTMP.SetText($"{hours:00}:{minutes:00}:{seconds:00}\n{gameTime:00}");
+                int hours = Mathf.FloorToInt(totalHours);
+                int minutes = Mathf.FloorToInt((totalHours - hours) * 60f);
+
+                timeTMP.SetText($"{hours:00}:{minutes:00}");
             }
+            
             if (statsTMP)
             {
                 string db = "?? ";
@@ -62,6 +65,7 @@ namespace GreenHour.UI
                 }
                 statsTMP.SetText($"{db}dB\n{hb}HB\n{curFPS}FPS");
             }
+            
             if (DayCycle.Instance != null) 
             {
                 if(fastForwardTMP)fastForwardTMP.gameObject.SetActive(DayCycle.Instance.IsFastForward());

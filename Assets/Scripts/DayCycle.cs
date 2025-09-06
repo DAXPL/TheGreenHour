@@ -124,7 +124,7 @@ namespace GreenHour.Enviroment
         }
         public float GetInGameTime()
         {
-            return Mathf.Lerp(7.0f,22.0f, time);
+            return time;
         }
 
         public void SetTimePenalty(float time)

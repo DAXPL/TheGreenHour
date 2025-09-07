@@ -49,6 +49,7 @@ namespace GreenHour.Player
         private float verticalVelocity;
         private float pitch = 0f;
 
+        private bool canMove = true;
         private bool isCrouching = false;
         private bool wasGrounded = false;
 
@@ -103,6 +104,7 @@ namespace GreenHour.Player
 
         private void Update()
         {
+            if(!canMove) return;
             HandleMovement();
             HandleLook();
             HandleHeadBobbing();
@@ -264,5 +266,16 @@ namespace GreenHour.Player
                 audioSource.PlayOneShot(clip, volumeScale);
             }
         }
+
+        public void ToggleMovement(bool state)
+        {
+            canMove = state;
+            if(state == false)
+            {
+                lookInput = Vector2.zero;
+                moveDirection = Vector3.zero;
+            }
+        }
+
     }
 }

@@ -1,3 +1,4 @@
+using GreenHour.Gameplay.Events;
 using System;
 using System.Linq;
 using TMPro;
@@ -21,7 +22,11 @@ namespace GreenHour.GameSettings
         public Slider sfxSlider;
 
         private Resolution[] availableResolutions;
-        
+
+        [Header("Events")]
+        [SerializeField] private GameEvent enableMovement;
+        [SerializeField] private GameEvent disableMovement;
+
         [ContextMenu("Initialize")]
         public void Initialize()
         {
@@ -33,6 +38,12 @@ namespace GreenHour.GameSettings
         private void OnEnable()
         {
             Initialize();
+            disableMovement.Raise();
+        }
+
+        private void OnDisable()
+        {
+            enableMovement.Raise();
         }
         //Screen
         private void InitializeResolutions()

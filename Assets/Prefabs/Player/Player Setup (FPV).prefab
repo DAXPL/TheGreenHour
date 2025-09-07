@@ -580,6 +580,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3053562317053481265, guid: 4d01e0d298f6c154e9a4f0434bfcf07a, type: 3}
+      propertyPath: enableMovement
+      value: 
+      objectReference: {fileID: 11400000, guid: ba14dc50bb13169469be6529567fdcef, type: 2}
+    - target: {fileID: 3053562317053481265, guid: 4d01e0d298f6c154e9a4f0434bfcf07a, type: 3}
+      propertyPath: disableMovement
+      value: 
+      objectReference: {fileID: 11400000, guid: 49b37c7f99eb06b43bef6feb9b190495, type: 2}
+    - target: {fileID: 3272829883556794221, guid: 4d01e0d298f6c154e9a4f0434bfcf07a, type: 3}
+      propertyPath: enableMovement
+      value: 
+      objectReference: {fileID: 11400000, guid: ba14dc50bb13169469be6529567fdcef, type: 2}
+    - target: {fileID: 3272829883556794221, guid: 4d01e0d298f6c154e9a4f0434bfcf07a, type: 3}
+      propertyPath: disableMovement
+      value: 
+      objectReference: {fileID: 11400000, guid: 49b37c7f99eb06b43bef6feb9b190495, type: 2}
     - target: {fileID: 3798089561107939035, guid: 4d01e0d298f6c154e9a4f0434bfcf07a, type: 3}
       propertyPath: m_Name
       value: CameraOverlay

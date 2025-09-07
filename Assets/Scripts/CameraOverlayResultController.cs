@@ -1,4 +1,5 @@
 using GreenHour.Gameplay;
+using GreenHour.Gameplay.Events;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -11,12 +12,15 @@ namespace GreenHour.UI
         [SerializeField] private TextMeshProUGUI safetyDesc;
         [SerializeField] private TextMeshProUGUI presenceDesc;
         [SerializeField] private GameObject nextButton;
+        [SerializeField] private GameEvent enableMovement;
+        [SerializeField] private GameEvent disableMovement;
         private IEnumerator StartSequence()
         {
             group.alpha = 0.0f;
             safetyDesc.text = "";
             presenceDesc.text = "";
             nextButton.SetActive(false);
+            disableMovement.Raise();
 
             if ((GameManager.Instance)) GameManager.Instance.SetCursor(true);
             string safetyText = GameManager.Instance != null ? GameManager.Instance.GetSafetyDesc() : "Missing no.";
@@ -41,7 +45,7 @@ namespace GreenHour.UI
             if ((GameManager.Instance)) GameManager.Instance.SetCursor(false);
             group.alpha = 1.0f;
             nextButton.SetActive(false);
-
+            enableMovement.Raise();
             float f = 1;
             while (f >= -0.1f)
             {

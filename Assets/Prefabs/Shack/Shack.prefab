@@ -10626,7 +10626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activationTime: 5
-  activationPenalty: 0.2
+  activationPenalty: 45
   OnStartInteraction:
     m_PersistentCalls:
       m_Calls: []

@@ -2,6 +2,7 @@ using GreenHour.Enviroment;
 using GreenHour.Immersion;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GreenHour.UI
 {
@@ -12,6 +13,10 @@ namespace GreenHour.UI
         [SerializeField] private TextMeshProUGUI timeTMP;
         [SerializeField] private TextMeshProUGUI statsTMP;
         [SerializeField] private TextMeshProUGUI fastForwardTMP;
+        [Space]
+        [SerializeField] private UnityEvent onFastForward;
+        private bool wasFastForward;
+
         float time = 0;
         private float fpsTimer = 0f;
         private int frames = 0;
@@ -20,6 +25,8 @@ namespace GreenHour.UI
         private void Start()
         {
             if (fastForwardTMP) fastForwardTMP.gameObject.SetActive(false);
+            if (dateTMP) dateTMP.SetText($"{System.DateTime.Now}");
+            if (resolutionTMP) resolutionTMP.SetText($"{Screen.height}P");
         }
 
         private void Update()
@@ -38,19 +45,13 @@ namespace GreenHour.UI
         
         private void FixedUpdate()
         {
-            if(dateTMP)dateTMP.SetText($"{System.DateTime.Now}");
+            if(dateTMP && DayCycle.Instance!=null)dateTMP.SetText(DayCycle.Instance.GetInGameDate());
             
             if(resolutionTMP)resolutionTMP.SetText($"{Screen.height}P");
             
             if (timeTMP)
             {
-                float gameTime = (DayCycle.Instance != null) ? DayCycle.Instance.GetInGameTime() : 0f;
-                float totalHours = 6f + gameTime * 16f;
-
-                int hours = Mathf.FloorToInt(totalHours);
-                int minutes = Mathf.FloorToInt((totalHours - hours) * 60f);
-
-                timeTMP.SetText($"{hours:00}:{minutes:00}");
+                timeTMP.SetText(DayCycle.Instance != null ? DayCycle.Instance.GetInGameTime():"");
             }
             
             if (statsTMP)
@@ -68,7 +69,17 @@ namespace GreenHour.UI
             
             if (DayCycle.Instance != null) 
             {
-                if(fastForwardTMP)fastForwardTMP.gameObject.SetActive(DayCycle.Instance.IsFastForward());
+                bool ff = DayCycle.Instance.IsFastForward();
+                if (ff && !wasFastForward) 
+                { 
+                    onFastForward.Invoke();
+                    if (fastForwardTMP) fastForwardTMP.gameObject.SetActive(true);
+                }
+                if (!ff && wasFastForward)
+                {
+                    if (fastForwardTMP) fastForwardTMP.gameObject.SetActive(false);
+                }
+                wasFastForward = ff;
             }
         }
 

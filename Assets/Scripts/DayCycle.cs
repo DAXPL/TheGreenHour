@@ -18,8 +18,14 @@ namespace GreenHour.Enviroment
         [SerializeField] private float timescale = 1f;
         [SerializeField] private float minAngle = 30f;
         [SerializeField] private float maxAngle = 185f;
+        [SerializeField] private float minHour = 7;
+        [SerializeField] private float maxHour = 22;
         [SerializeField] private float dayDuration = 60f;
-        [SerializeField] private float fastForwartMultipiler = 4f;
+
+        [SerializeField] private float fastForwardDuration = 3f;
+        private float fastForwardRemaining = 0f;
+        private float fastForwardTarget = 0f;
+
         [SerializeField] private AnimationCurve sunAngleCurve;
         [Header("Events")]
         public UnityEvent OnDayStart;
@@ -35,6 +41,10 @@ namespace GreenHour.Enviroment
         private float penalty = 0;
         private bool timeIsAbleToFlow = true;
 
+        private int day = 0;
+        private int month = 0;
+        private int year = 0;
+
         private void Awake()
         {
             if(Instance == null)
@@ -47,18 +57,33 @@ namespace GreenHour.Enviroment
             }
         }
 
+        private void Start()
+        {
+            day = System.DateTime.Now.Day;
+            month = System.DateTime.Now.Month;
+            year = System.DateTime.Now.Year;
+        }
+
         void Update()
         {
-            if(timeIsAbleToFlow == false) return;
+            if (timeIsAbleToFlow == false) return;
 
-            float timeflow = (Time.deltaTime / dayDuration) * timescale;
-            time += timeflow*((penalty>0)? fastForwartMultipiler:1.0f);
+            float baseFlow = (Time.deltaTime / dayDuration) * timescale;
 
-            if (penalty > 0) 
+            if (penalty > 0)
             {
                 Debug.Log("Fast forward");
-                penalty -= ((Time.deltaTime / dayDuration) * timescale) * fastForwartMultipiler;
-                if(penalty<0) penalty= 0;
+                float step = (fastForwardTarget / fastForwardDuration) * Time.deltaTime;
+
+                time += step / dayDuration;
+                penalty -= step;
+                fastForwardRemaining -= Time.deltaTime;
+
+                if (penalty < 0) penalty = 0;
+            }
+            else
+            {
+                time += baseFlow;
             }
 
             if (time >= 1f)
@@ -122,15 +147,27 @@ namespace GreenHour.Enviroment
         {
             return time;
         }
-        public float GetInGameTime()
+        public string GetInGameTime()
         {
-            return time;
+            float totalHours = minHour + time * (maxHour-minHour);
+
+            int hours = Mathf.FloorToInt(totalHours);
+            int minutes = Mathf.FloorToInt((totalHours - hours) * 60f);
+            return ($"{hours:00}:{minutes:00}");
+        }
+
+        public string GetInGameDate()
+        {
+            return $"{day}:{month}:{year}";
         }
 
         public void SetTimePenalty(float time)
         {
             penalty += time;
+            fastForwardTarget = penalty;
+            fastForwardRemaining = fastForwardDuration;
         }
+        
         public bool IsFastForward()
         {
             return penalty > 0;

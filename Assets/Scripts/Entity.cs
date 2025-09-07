@@ -20,11 +20,12 @@ namespace GreenHour.Gameplay
         private const int maxPresence = 10;
 
         public enum PresenceLevel { None, Low, Medium, High }
+        public enum SafetyLevel { Low, Medium, High }
 
-        public void IncreaseLevels(int presenceAmount, int safetyLevel)
+        public void IncreaseLevels(int presenceAmount, int safetyAmount)
         {
             presenceLevel += presenceAmount;
-            safetyLevel += safetyLevel;
+            safetyLevel += safetyAmount;
         }
 
         public bool WantsToEscape()
@@ -34,21 +35,39 @@ namespace GreenHour.Gameplay
 
         public PresenceLevel GetPresenceLevel()
         {
-            if(presenceLevel == 0)
+            if (presenceLevel == 0)
             {
                 return PresenceLevel.None;
             }
-            else if (presenceLevel <= (maxPresence*(1/3)))
+            else if (presenceLevel <= (int)(maxPresence * (1f / 3f)))
             {
                 return PresenceLevel.Low;
             }
-            else if (presenceLevel <= (maxPresence * (2 / 3)))
+            else if (presenceLevel <= (int)(maxPresence * (2f / 3f)))
             {
                 return PresenceLevel.Medium;
             }
             else
             {
                 return PresenceLevel.High;
+            }
+        }
+
+        public SafetyLevel GetSafetyLevel()
+        {
+            int diff = safetyLevel - presenceLevel;
+
+            if (diff >= 5) // sporo bezpieczniej ni¿ obecnoœæ
+            {
+                return SafetyLevel.High;
+            }
+            else if (diff >= 0) // w miarê wyrównane
+            {
+                return SafetyLevel.Medium;
+            }
+            else // presence wiêksze ni¿ safety
+            {
+                return SafetyLevel.Low;
             }
         }
 

@@ -1,3 +1,4 @@
+using GreenHour.Gameplay;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -90,6 +91,7 @@ namespace GreenHour.Enviroment
             {
                 OnDayEnd?.Invoke();
                 timeIsAbleToFlow = false;
+                if(GameManager.Instance != null)GameManager.Instance.EndDay();
             }
 
             if (SunPivot)
@@ -153,7 +155,7 @@ namespace GreenHour.Enviroment
 
             int hours = Mathf.FloorToInt(totalHours);
             int minutes = Mathf.FloorToInt((totalHours - hours) * 60f);
-            return ($"{hours:00}:{minutes:00}");
+            return ($"{hours:D2}:{minutes:D2}");
         }
 
         public string GetInGameDate()

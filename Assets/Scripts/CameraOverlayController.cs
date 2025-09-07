@@ -8,6 +8,7 @@ namespace GreenHour.UI
 {
     public class CameraOverlayController : MonoBehaviour
     {
+        [Header("Gameplay UI")]
         [SerializeField] private TextMeshProUGUI dateTMP;
         [SerializeField] private TextMeshProUGUI resolutionTMP;
         [SerializeField] private TextMeshProUGUI timeTMP;

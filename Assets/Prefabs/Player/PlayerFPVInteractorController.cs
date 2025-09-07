@@ -1,3 +1,4 @@
+using GreenHour.Gameplay;
 using GreenHour.Interactions;
 using GreenHour.Interactions.Items;
 using GreenHour.PhysicsSurface;
@@ -5,10 +6,11 @@ using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
-using UnityEngine.UI;
 namespace GreenHour.Player
 {
     public class PlayerFPVInteractorController : MonoBehaviour
@@ -34,6 +36,7 @@ namespace GreenHour.Player
         private Item grabbedItem;
         [Header("UI")]
         [SerializeField] private GameObject interactionUI;
+        [SerializeField] private GameObject resultUI;
         [SerializeField] private Image progressImage;
 
         private void OnEnable()
@@ -57,10 +60,19 @@ namespace GreenHour.Player
                 menuActionReference.action.started += OnMenuAction;
             }
         }
-
+        private void Start()
+        {
+            if (GameManager.Instance) GameManager.Instance.SetCursor(false);
+        }
         private void OnMenuAction(InputAction.CallbackContext context)
         {
-            if(interactionUI) interactionUI.SetActive(!interactionUI.activeSelf);
+            if (interactionUI) 
+            {
+                if (resultUI != null && resultUI.activeSelf) return;
+                bool newState = !interactionUI.activeSelf;
+                if ((GameManager.Instance)) GameManager.Instance.SetCursor(newState);
+                interactionUI.SetActive(newState); 
+            }
         }
 
         private void OnDisable()

@@ -3,7 +3,6 @@ using GreenHour.Gameplay.Events;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 namespace GreenHour.UI
 {
     public class CameraOverlayResultController : MonoBehaviour
@@ -42,7 +41,11 @@ namespace GreenHour.UI
 
         private IEnumerator EndSequence()
         {
-            if ((GameManager.Instance)) GameManager.Instance.SetCursor(false);
+            if (GameManager.Instance)
+            {
+                GameManager.Instance.LoadNextDay();
+                GameManager.Instance.SetCursor(false);
+            }
             group.alpha = 1.0f;
             nextButton.SetActive(false);
             enableMovement.Raise();

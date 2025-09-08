@@ -38,12 +38,12 @@ namespace GreenHour.GameSettings
         private void OnEnable()
         {
             Initialize();
-            disableMovement.Raise();
+            if(disableMovement)disableMovement.Raise();
         }
 
         private void OnDisable()
         {
-            enableMovement.Raise();
+            if(enableMovement)enableMovement.Raise();
         }
         //Screen
         private void InitializeResolutions()

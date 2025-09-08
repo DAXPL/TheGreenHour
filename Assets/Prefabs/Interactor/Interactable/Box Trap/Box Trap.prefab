@@ -251,6 +251,7 @@ MonoBehaviour:
   m_ReinitializeDynamicAttachEverySingleGrab: 1
   m_AttachEaseInTime: 0.15
   m_MovementType: 2
+  m_PredictedVisualsTransform: {fileID: 0}
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
@@ -292,6 +293,10 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+  m_LimitLinearVelocity: 0
+  m_LimitAngularVelocity: 0
+  m_MaxLinearVelocityDelta: 10
+  m_MaxAngularVelocityDelta: 20
 --- !u!1 &4458224435176466289
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,6 +869,7 @@ MonoBehaviour:
     presencePenalty: 1
     safetyPenalty: 0
   singleUse: 1
+  minimalPresenceLevel: 0
   SetupAction:
     m_PersistentCalls:
       m_Calls:
@@ -1065,7 +1071,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bc9989ccff49140ac5490cc2fc0288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activationTime: 2
+  activationTime: 5
+  activationPenalty: 45
   OnStartInteraction:
     m_PersistentCalls:
       m_Calls: []
@@ -1087,6 +1094,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnToggle:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &905085776262129794
 BoxCollider:
   m_ObjectHideFlags: 0

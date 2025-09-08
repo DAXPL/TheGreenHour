@@ -30,7 +30,7 @@ namespace GreenHour.Gameplay
 
         public bool WantsToEscape()
         {
-            return presenceLevel>safetyLevel;
+            return (presenceLevel>safetyLevel) && (GetPresenceLevel()>PresenceLevel.Medium);
         }
 
         public PresenceLevel GetPresenceLevel()

@@ -36,11 +36,15 @@ namespace GreenHour.Enviroment
         public UnityEvent OnDawnStart;
         public UnityEvent OnDayPhaseStart;
         public UnityEvent OnDuskStart;
+        [Space]
+        public UnityEvent OnFastForward;
+        public UnityEvent OnEndFastForward;
         private DayPhase currentPhase = DayPhase.Dawn;
 
         private float time = 0f;
         private float penalty = 0;
         private bool timeIsAbleToFlow = true;
+        private bool isFastForwarding = false;
 
         private int day = 0;
         private int month = 0;
@@ -73,10 +77,11 @@ namespace GreenHour.Enviroment
 
             if (penalty > 0)
             {
-                Debug.Log("Fast forward");
-                float step = (fastForwardTarget / fastForwardDuration) * Time.deltaTime;
+                float fractionPerSecond = fastForwardTarget / fastForwardDuration;
 
-                time += step / dayDuration;
+                float step = fractionPerSecond * Time.deltaTime;
+
+                time += step;
                 penalty -= step;
                 fastForwardRemaining -= Time.deltaTime;
 
@@ -87,11 +92,22 @@ namespace GreenHour.Enviroment
                 time += baseFlow;
             }
 
+            bool isFF = penalty > 0;
+            if (isFF && !isFastForwarding)
+            {
+                OnFastForward.Invoke();
+            }
+            if (!isFF && isFastForwarding)
+            {
+                OnEndFastForward.Invoke();
+            }
+            isFastForwarding = isFF;
+
             if (time >= 1f)
             {
                 OnDayEnd?.Invoke();
                 timeIsAbleToFlow = false;
-                if(GameManager.Instance != null)GameManager.Instance.EndDay();
+                if(GameManager.Instance != null)GameManager.Instance.EndDay(false);
             }
 
             if (SunPivot)
@@ -138,9 +154,10 @@ namespace GreenHour.Enviroment
         }
 
         [ContextMenu("Restet Day")]
-        public void ResetDayCycle()
+        public void ResetDayCycle(int penalty = 0)
         {
             time = 0f;
+            time += MinutesToFraction(penalty);
             OnDayStart?.Invoke();
             timeIsAbleToFlow = true;
         }
@@ -157,15 +174,19 @@ namespace GreenHour.Enviroment
             int minutes = Mathf.FloorToInt((totalHours - hours) * 60f);
             return ($"{hours:D2}:{minutes:D2}");
         }
-
+        public float MinutesToFraction(int minutes)
+        {
+            float totalGameMinutes = (maxHour - minHour) * 60f;
+            return minutes / totalGameMinutes;
+        }
         public string GetInGameDate()
         {
             return $"{day}:{month}:{year}";
         }
 
-        public void SetTimePenalty(float time)
+        public void SetTimePenalty(int penaltyTime)
         {
-            penalty += time;
+            penalty += MinutesToFraction(penaltyTime);
             fastForwardTarget = penalty;
             fastForwardRemaining = fastForwardDuration;
         }

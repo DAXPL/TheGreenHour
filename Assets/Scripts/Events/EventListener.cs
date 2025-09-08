@@ -9,11 +9,11 @@ namespace GreenHour.Gameplay.Events
         public UnityEvent response;
         private void OnEnable()
         {
-            action.RegisterListener(this);
+            if(action)action.RegisterListener(this);
         }
         private void OnDisable()
         {
-            action.UnRegisterListener(this);
+            if (action) action.UnRegisterListener(this);
         }
         public void Invoke()
         {

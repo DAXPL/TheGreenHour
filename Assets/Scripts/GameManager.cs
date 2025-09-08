@@ -16,7 +16,9 @@ namespace GreenHour.Gameplay
         [SerializeField] private Entity currentEntity;
         [SerializeField] private List<GameEvent> randomEvents;
         [SerializeField] private GameEvent showResults;
+        [SerializeField] private Transform bedPosition;
         private int day = 0;
+        private bool usedBedToSleep = true;
         private void Awake()
         {
             if(Instance == null)
@@ -76,12 +78,29 @@ namespace GreenHour.Gameplay
         }
 
         [ContextMenu("Debug - end day")]
-        public void EndDay()
+        public void EndDay(bool usedBed)
         {
+            usedBedToSleep = usedBed;
             CalculateDayResult();
+        }
+        public void LoadNextDay()
+        {
+            Debug.LogWarningFormat($"{usedBedToSleep}{bedPosition != null}");
+            if (usedBedToSleep==false && bedPosition!=null)
+            {
+                CharacterController player = FindAnyObjectByType<CharacterController>();
+                Debug.LogWarningFormat($"{player != null}");
+                if (player != null) 
+                { 
+                    player.enabled = false;
+                    player.transform.position = bedPosition.position;
+                    player.enabled = true;
+                }
+            }
+
             DayCycle dayCycle = DayCycle.Instance;
             if (dayCycle == null) return;
-            dayCycle.ResetDayCycle();
+            dayCycle.ResetDayCycle(usedBedToSleep ? 0 : 120);
         }
 
         public string GetSafetyDesc()

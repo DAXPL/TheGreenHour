@@ -49,6 +49,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: c206807714351a148a4c840bbc237834, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: c206807714351a148a4c840bbc237834, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 42587b1b2a7aef54f80b694f3ee90ed5, type: 2}
@@ -192,6 +196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WoodDoor01
       objectReference: {fileID: 0}
+    - target: {fileID: 1401746240209326, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4300319930065006, guid: bebc556220f8f12419248357a74e709f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.1173
@@ -248,7 +256,9 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 64969138912156256, guid: bebc556220f8f12419248357a74e709f, type: 3}
+    - {fileID: 65140264541946244, guid: bebc556220f8f12419248357a74e709f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -368,8 +378,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.098, y: 1.78, z: 1.18}
-  m_Center: {x: 0, y: 0.9, z: -0.6}
+  m_Size: {x: 0.049284, y: 1.7759001, z: 1.1670362}
+  m_Center: {x: 0.024357751, y: 0.89795005, z: -0.60647964}
 --- !u!54 &6566362709008682049
 Rigidbody:
   m_ObjectHideFlags: 0

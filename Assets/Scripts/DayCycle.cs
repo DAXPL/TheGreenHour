@@ -15,6 +15,7 @@ namespace GreenHour.Enviroment
             Dusk,
             Night
         }
+
         [SerializeField] private GameObject SunPivot;
         [SerializeField] private float timescale = 1f;
         [SerializeField] private float minAngle = 30f;
@@ -67,6 +68,8 @@ namespace GreenHour.Enviroment
             day = System.DateTime.Now.Day;
             month = System.DateTime.Now.Month;
             year = System.DateTime.Now.Year;
+            UpdateDayPhase();
+            OnDawnStart?.Invoke();
         }
 
         void Update()
@@ -115,6 +118,7 @@ namespace GreenHour.Enviroment
                 float sunAngle = Mathf.Lerp(minAngle, maxAngle, sunAngleCurve.Evaluate(time));
                 SunPivot.transform.localRotation = Quaternion.Euler(sunAngle, 0f, 0f);
             }
+            UpdateDayPhase();
         }
 
         void UpdateDayPhase()
@@ -160,6 +164,7 @@ namespace GreenHour.Enviroment
             time += MinutesToFraction(penalty);
             OnDayStart?.Invoke();
             timeIsAbleToFlow = true;
+            day++;
         }
 
         public float GetTime()
@@ -181,7 +186,7 @@ namespace GreenHour.Enviroment
         }
         public string GetInGameDate()
         {
-            return $"{day}:{month}:{year}";
+            return $"{day:D2}:{month:D2}:{year}";
         }
 
         public void SetTimePenalty(int penaltyTime)

@@ -28,6 +28,7 @@ namespace GreenHour.UI
             if (fastForwardTMP) fastForwardTMP.gameObject.SetActive(false);
             if (dateTMP) dateTMP.SetText($"{System.DateTime.Now}");
             if (resolutionTMP) resolutionTMP.SetText($"{Screen.height}P");
+            if (timeTMP) timeTMP.SetText("");
         }
 
         private void Update()
@@ -46,15 +47,18 @@ namespace GreenHour.UI
         
         private void FixedUpdate()
         {
-            if(dateTMP && DayCycle.Instance!=null)dateTMP.SetText(DayCycle.Instance.GetInGameDate());
+            if (dateTMP && DayCycle.Instance != null)
+            {
+                dateTMP.SetText(DayCycle.Instance != null ? $"{DayCycle.Instance.GetInGameDate()}\n{DayCycle.Instance.GetInGameTime()}" : "");
+            }
             
             if(resolutionTMP)resolutionTMP.SetText($"{Screen.height}P");
-            
+            /*
             if (timeTMP)
             {
                 timeTMP.SetText(DayCycle.Instance != null ? DayCycle.Instance.GetInGameTime():"");
             }
-            
+            */
             if (statsTMP)
             {
                 string db = "?? ";

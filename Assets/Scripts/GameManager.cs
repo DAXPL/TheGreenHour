@@ -110,11 +110,31 @@ namespace GreenHour.Gameplay
             switch (presenceLevel)
             {
                 case PresenceLevel.Low:
-                    return "Cisza staje siê napiêta. Ka¿dy szelest zdaje siê mieæ znaczenie – las nie jest zadowolony z mojej obecnoœci. Jestem za g³oœno, p³oszê byt.";
+                    string[] descsL =
+                    {
+                        "The entity hasn’t revealed itself yet. Maybe it’s still hiding from me.",
+                        "Nothing unusual happened… but I can’t shake the feeling I’m being observed.",
+                        "The forest stays quiet. If it’s here, it’s keeping its distance.",
+                        "Still hiding, huh? Classic cryptid move. I’ll smoke you out tomorrow."
+                    };
+                    return descsL[Random.Range(0,descsL.Length)];
                 case PresenceLevel.Medium:
-                    return "Niepokój bytu roœnie. Wydaje siê, ¿e ktoœ lub coœ bacznie przygl¹da siê ka¿demu mojemu ruchowi. Muszê byæ ostro¿ny i nie mogê go sp³oszyæ";
+                    string[] descsM =
+                    {
+                        "Something is near. I’m sure of it.",
+                        "I’m not crazy. The signs are here. Just wait till I post this!",
+                        "No reveal yet… but tomorrow’s the day, I can feel it!",
+                        "Not a coincidence anymore. Every rustle screams proof!"
+                    };
+                    return descsM[Random.Range(0, descsM.Length)];
                 case PresenceLevel.High:
-                    return "Powietrze wci¹¿ spokojne. Coœ nieœmia³o majaczy w oddali, ale wci¹¿ siê mnie obawia";
+                    string[] descsH =
+                    {
+                        "No doubt now — the entity is here, moving in the dark.",
+                        "Every shadow, every sound screams its presence.",
+                        "If I make it out, this will be the proof of a lifetime!"
+                    };
+                    return descsH[Random.Range(0, descsH.Length)];
                 default:
                     return "Missing no.";
             }
@@ -127,11 +147,32 @@ namespace GreenHour.Gameplay
             switch (safeLevel)
             {
                 case SafetyLevel.Low:
-                    return "Czujê jej cieñ w powietrzu, daleko, ledwie wyczuwalnie. Jakby œledzi³a ka¿dy mój krok zza mg³y.";
+                    string[] descsL =
+                    {
+                        "Damn, I pushed too hard… it almost bolted! Need to chill, or I’ll lose it all.",
+                        "I’m scaring it off… no, no, no! If it runs, I lose everything!",
+                        "That was too much. One more slip and it’s gone for good.",
+                        "Ugh, I acting like a tourist, not a researcher. Rookie mistake."
+                    };
+                    return descsL[Random.Range(0, descsL.Length)];
                 case SafetyLevel.Medium:
-                    return "Powoli zbli¿a siê do mnie. Ka¿dy dŸwiêk w lesie mo¿e byæ wskazówk¹ – chyba idzie mi dobrze.";
+                    string[] descsM =
+                    {
+                        "It knows I’m here, but it hasn’t left. This is the sweet spot.",
+                        "The creature is wary… but curious. We’re dancing on a knife’s edge.",
+                        "Every move matters now. One wrong sound and it’s gone, one right gesture and it stays.",
+                        "It’s keeping its distance, but it hasn’t vanished. That’s hope."
+                    };
+                    return descsM[Random.Range(0, descsM.Length)];
                 case SafetyLevel.High:
-                    return "Ju¿ prawie zdoby³em zaufanie lasu. Ka¿dy oddech to sygna³, ¿e nie jestem sam. Jestem blisko celu.";
+                    string[] descsH =
+                    {
+                        "I’ve earned its trust. For once, the legend doesn’t run — it stays.",
+                        "The creature feels safe with me. This is history in the making!",
+                        "Incredible. It stayed — I think it actually trusts me!",
+                        "For a second, it felt like we shared the same silence. Like it wanted me here"
+                    };
+                    return descsH[Random.Range(0, descsH.Length)];
                 default:
                     return "Missing no.";
             }

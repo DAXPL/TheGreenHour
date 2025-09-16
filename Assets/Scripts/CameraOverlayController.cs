@@ -3,6 +3,7 @@ using GreenHour.Immersion;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace GreenHour.UI
 {
@@ -11,9 +12,12 @@ namespace GreenHour.UI
         [Header("Gameplay UI")]
         [SerializeField] private TextMeshProUGUI dateTMP;
         [SerializeField] private TextMeshProUGUI resolutionTMP;
-        [SerializeField] private TextMeshProUGUI timeTMP;
+        [SerializeField] private TextMeshProUGUI infoTMP;
         [SerializeField] private TextMeshProUGUI statsTMP;
         [SerializeField] private TextMeshProUGUI fastForwardTMP;
+        [Space]
+        [SerializeField] private Image batteryLevelImage;
+        [SerializeField] private Sprite[] batteryLevels;
         [Space]
         [SerializeField] private UnityEvent onFastForward;
         private bool wasFastForward;
@@ -22,13 +26,14 @@ namespace GreenHour.UI
         private float fpsTimer = 0f;
         private int frames = 0;
         private int curFPS = 0;
+        private int currentBatteryLevel = 0;
 
         private void Start()
         {
             if (fastForwardTMP) fastForwardTMP.gameObject.SetActive(false);
             if (dateTMP) dateTMP.SetText($"{System.DateTime.Now}");
             if (resolutionTMP) resolutionTMP.SetText($"{Screen.height}P");
-            if (timeTMP) timeTMP.SetText("");
+            if (infoTMP) infoTMP.SetText("");
         }
 
         private void Update()
@@ -53,12 +58,7 @@ namespace GreenHour.UI
             }
             
             if(resolutionTMP)resolutionTMP.SetText($"{Screen.height}P");
-            /*
-            if (timeTMP)
-            {
-                timeTMP.SetText(DayCycle.Instance != null ? DayCycle.Instance.GetInGameTime():"");
-            }
-            */
+
             if (statsTMP)
             {
                 string db = "?? ";
@@ -86,6 +86,31 @@ namespace GreenHour.UI
                 }
                 wasFastForward = ff;
             }
+
+            if (batteryLevelImage != null && batteryLevels.Length > 0)
+            {
+                int bLevel = BatteryLevel(batteryLevels.Length);
+                if (bLevel != currentBatteryLevel && bLevel<batteryLevels.Length)
+                {
+                    currentBatteryLevel = bLevel;
+                    batteryLevelImage.sprite = batteryLevels[bLevel];
+                }
+            }
+        }
+
+        private int BatteryLevel(int levels)
+        {
+            if (DayCycle.Instance == null) return 0;
+
+            float t = DayCycle.Instance.GetTime();
+
+            if (t >= 0.9f)
+                return 0;
+
+            float normalized = t / 0.9f;
+            float value = Mathf.Lerp(levels, 1, normalized);
+
+            return Mathf.Clamp(Mathf.RoundToInt(value), 1, levels);
         }
 
     }

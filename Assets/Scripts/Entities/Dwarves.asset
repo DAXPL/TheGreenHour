@@ -13,3 +13,13 @@ MonoBehaviour:
   m_Name: Dwarves
   m_EditorClassIdentifier: 
   EntityName: Krasnale Borowe
+  recordedSounds: []
+  recordedImages: []
+  lowPresenceEvents:
+  - {fileID: 11400000, guid: a627d28786276e64da02f465ee9f6975, type: 2}
+  mediumPresenceEvents:
+  - {fileID: 11400000, guid: fc7b6229f3fc13c4eb898abe8e14ef63, type: 2}
+  - {fileID: 11400000, guid: febb7522981fd8549a36779bbfaed22e, type: 2}
+  - {fileID: 11400000, guid: 0d8354003a2b82b43a44d6a440c06ec1, type: 2}
+  highPresenceEvents:
+  - {fileID: 11400000, guid: efffb3b4914e0e54c99fece283b0cbed, type: 2}

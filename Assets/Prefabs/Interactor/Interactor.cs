@@ -1,10 +1,12 @@
 using GreenHour.Enviroment;
+using GreenHour.Interactions.Items;
 using UnityEngine;
 using UnityEngine.Events;
 namespace GreenHour.Interactions
 {
     public class Interactor : MonoBehaviour
     {
+        [SerializeField] private ItemData activationItem;
         [SerializeField] private float activationTime = 2.0f;
         [SerializeField] private int activationPenalty = 0;
         private float activationTimer = 0.0f;
@@ -15,9 +17,11 @@ namespace GreenHour.Interactions
         [SerializeField] private UnityEvent OnStopInteraction;
         [SerializeField] private UnityEvent OnInteractionSuccess;
         [SerializeField] private UnityEvent<bool> OnToggle;
-        public void StartInteraction()
+        private ItemData itemInUse;
+        public void StartInteraction(Item holdedItem = null)
         {
             if(isInInteraction == true) return;
+            if (holdedItem != null) itemInUse = holdedItem.GetData(); 
             isInInteraction = true;
             activationTimer = 0;
             OnStartInteraction.Invoke();
@@ -26,6 +30,7 @@ namespace GreenHour.Interactions
         public void StopInteraction()
         {
             if(isInInteraction == false) return;
+            itemInUse = null;
             isInInteraction = false;
             activationTimer = 0;
             OnStopInteraction.Invoke();
@@ -33,7 +38,11 @@ namespace GreenHour.Interactions
 
         private void InteractionSucceed()
         {
+            ItemData usedItem = itemInUse;
             StopInteraction();
+            if (activationItem != null && activationItem != usedItem)
+                return;
+
             OnInteractionSuccess.Invoke();
             toggled = !toggled;
             OnToggle.Invoke(toggled);

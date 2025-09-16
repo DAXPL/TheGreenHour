@@ -32,6 +32,11 @@ namespace GreenHour.Enviroment
         [Header("Events")]
         public UnityEvent OnDayStart;
         public UnityEvent OnDayEnd;
+        public UnityEvent DayOneStart;
+        public UnityEvent DayTwoStart;
+        public UnityEvent DayThreeStart;
+        public UnityEvent DayFourStart;
+        public UnityEvent DayFiveStart;
         [Header("Day Phase Events")]
         public UnityEvent OnNightStart;
         public UnityEvent OnDawnStart;

@@ -137,7 +137,7 @@ namespace GreenHour.Player
             else if (i != null)
             {
                 interactor = i;
-                interactor.StartInteraction();
+                interactor.StartInteraction(grabbedItem);
                 return;
             }
             else if (grabbedItem != null)

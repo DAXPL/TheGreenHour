@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: Leshy
   m_EditorClassIdentifier: 
   EntityName: Leszy
+  recordedSounds: []
+  recordedImages: []
+  lowPresenceEvents:
+  - {fileID: 11400000, guid: 419e243f938c6814aaebca2fcd8e2ce8, type: 2}
+  mediumPresenceEvents: []
+  highPresenceEvents: []

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using static GreenHour.Gameplay.Entity;
-
+using GreenHour.GameSettings;
 
 namespace GreenHour.Gameplay
 {
@@ -17,13 +17,13 @@ namespace GreenHour.Gameplay
         [SerializeField] private List<GameEvent> randomEvents;
         [SerializeField] private GameEvent showResults;
         [SerializeField] private Transform bedPosition;
-        private int day = 0;
         private bool usedBedToSleep = true;
         private void Awake()
         {
             if(Instance == null)
             {
                 Instance = this;
+                GameSettings.GameSettings.LoadSettings();
             }
             else
             {
@@ -33,7 +33,8 @@ namespace GreenHour.Gameplay
         }
         private void Start() 
         {
-            if(entities.Count <= 0)
+            GraphicsSettingsApplier.LoadSettings();
+            if (entities.Count <= 0)
             {
                 Debug.LogError("No entities!");
                 return;
@@ -49,7 +50,6 @@ namespace GreenHour.Gameplay
                 return;
             }
 
-            day++;
             int presenceAmount = 1; //Because everyday increasing
             int safetyAmount = 0;
             Action[] actions = FindObjectsByType<Action>(FindObjectsSortMode.None);

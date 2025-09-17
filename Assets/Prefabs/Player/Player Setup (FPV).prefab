@@ -374,6 +374,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (FPV)
       objectReference: {fileID: 0}
+    - target: {fileID: 8737786152738480634, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
+      propertyPath: m_TagString
+      value: MainCamera
+      objectReference: {fileID: 0}
     - target: {fileID: 9112376487051197377, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

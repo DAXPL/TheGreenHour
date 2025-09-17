@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: Northern Wren
   m_EditorClassIdentifier: 
   EntityName: "P\xF3\u0142nooocnica"
+  recordedSounds: []
+  recordedImages: []
+  lowPresenceEvents: []
+  mediumPresenceEvents: []
+  highPresenceEvents:
+  - {fileID: 11400000, guid: 07f691129b24a884a806ea3bf9e6bd5a, type: 2}

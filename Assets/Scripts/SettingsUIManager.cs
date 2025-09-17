@@ -1,5 +1,7 @@
 using GreenHour.Gameplay.Events;
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -12,11 +14,13 @@ namespace GreenHour.GameSettings
         [Header("Screen")]
         public TMP_Dropdown resolutionDropdown;
         public TMP_Dropdown graphicsDropdown;
+        public TMP_Dropdown upscalingDropdown;
+        public TMP_Dropdown upscalinglevelDropdown;
+        [Space]
         public Toggle fullscreenToggle;
         public Toggle vsyncToggle;
 
         [Header("Audio")]
-        public AudioMixer audioMixer;
         public Slider masterSlider;
         public Slider musicSlider;
         public Slider sfxSlider;
@@ -28,7 +32,8 @@ namespace GreenHour.GameSettings
         [SerializeField] private GameEvent disableMovement;
 
         [ContextMenu("Initialize")]
-        public void Initialize()
+
+        private void Start()
         {
             InitializeResolutions();
             InitializeGraphicsQuality();
@@ -37,13 +42,13 @@ namespace GreenHour.GameSettings
 
         private void OnEnable()
         {
-            Initialize();
             if(disableMovement)disableMovement.Raise();
         }
 
         private void OnDisable()
         {
             if(enableMovement)enableMovement.Raise();
+            SaveSettings();
         }
         //Screen
         private void InitializeResolutions()
@@ -70,36 +75,37 @@ namespace GreenHour.GameSettings
             if (fullscreenToggle)
             {
                 fullscreenToggle.isOn = Screen.fullScreen;
-                if (fullscreenToggle) fullscreenToggle.onValueChanged.AddListener(SetFullscreen);
+                if (fullscreenToggle) fullscreenToggle.onValueChanged.AddListener(GraphicsSettingsApplier.SetFullscreen);
             }
 
             if (vsyncToggle)
             { 
                 vsyncToggle.isOn = QualitySettings.vSyncCount > 0;
-                vsyncToggle.onValueChanged.AddListener(SetVSync);
+                vsyncToggle.onValueChanged.AddListener(GraphicsSettingsApplier.ApplyVsync);
             }
-        }
+            if (upscalingDropdown)
+            {
+                List<string> upscalerOptions = new List<string> { "None", "DLSS", "FSR" };
+                upscalingDropdown.AddOptions(upscalerOptions);
+                upscalingDropdown.onValueChanged.AddListener(GraphicsSettingsApplier.SetUpscaling);
+                upscalingDropdown.onValueChanged.AddListener(index =>
+                {
+                    bool enableLevels = index != 0;
+                    if (upscalinglevelDropdown) upscalinglevelDropdown.interactable = enableLevels;
+                });
+            }
 
-        private void SetVSync(bool arg)
-        {
-            QualitySettings.vSyncCount = arg ? 1 : 0;
-            GameSettings.CurrentSettings.Vsync = arg;
-        }
-
-        private void SetFullscreen(bool arg)
-        {
-            Screen.fullScreen = arg;
-            GameSettings.CurrentSettings.Fullscreen = arg;
+            if (upscalinglevelDropdown)
+            {
+                List<string> upscalerLevels = new List<string> { "Quality", "Balanced", "Performance", "Maximum Performance" };
+                upscalinglevelDropdown.AddOptions(upscalerLevels);
+                upscalinglevelDropdown.onValueChanged.AddListener(GraphicsSettingsApplier.SetUpscalingLevel);
+            }    
         }
 
         private void SetResolution(int index)
         {
-            Resolution res = availableResolutions[index];
-            Screen.SetResolution(res.width, res.height, Screen.fullScreenMode, res.refreshRateRatio);
-
-            GameSettings.CurrentSettings.ScreenWidth = res.width;
-            GameSettings.CurrentSettings.ScreenHeight = res.height;
-            GameSettings.SaveSettings();
+            GraphicsSettingsApplier.SetResolution(availableResolutions[index]);
         }
 
         //Quality
@@ -112,59 +118,25 @@ namespace GreenHour.GameSettings
             graphicsDropdown.value = QualitySettings.GetQualityLevel();
             graphicsDropdown.RefreshShownValue();
 
-            graphicsDropdown.onValueChanged.AddListener(SetGraphicsQuality);
+            graphicsDropdown.onValueChanged.AddListener(GraphicsSettingsApplier.SetGraphicsQuality);
         }
-
-        private void SetGraphicsQuality(int index)
-        {
-            QualitySettings.SetQualityLevel(index);
-
-            GreenHour.GameSettings.GameSettings.CurrentSettings.GraphicsQuality = index;
-            GreenHour.GameSettings.GameSettings.SaveSettings();
-        }
-
-
+        
         //Audio
         private void InitializeAudioSliders()
         {
             masterSlider.value = GameSettings.CurrentSettings.MasterVolume;
             musicSlider.value = GameSettings.CurrentSettings.MusicVolume;
             sfxSlider.value = GameSettings.CurrentSettings.SFXVolume;
-
-            masterSlider.onValueChanged.AddListener(SetMasterVolume);
-            musicSlider.onValueChanged.AddListener(SetMusicVolume);
-            sfxSlider.onValueChanged.AddListener(SetSFXVolume);
-
-            SetMixerVolume("Master", masterSlider.value);
-            SetMixerVolume("Music", musicSlider.value);
-            SetMixerVolume("SFX", sfxSlider.value);
+            masterSlider.onValueChanged.AddListener(GraphicsSettingsApplier.SetMasterVolume);
+            musicSlider.onValueChanged.AddListener(GraphicsSettingsApplier.SetMusicVolume);
+            sfxSlider.onValueChanged.AddListener(GraphicsSettingsApplier.SetSFXVolume);
         }
 
-        private void SetMasterVolume(float value)
+        //Overall
+        [ContextMenu("Save settings")]
+        public void SaveSettings()
         {
-            SetMixerVolume("Master", value);
-            GameSettings.CurrentSettings.MasterVolume = value;
             GameSettings.SaveSettings();
-        }
-
-        private void SetMusicVolume(float value)
-        {
-            SetMixerVolume("Music", value);
-            GameSettings.CurrentSettings.MusicVolume = value;
-            GameSettings.SaveSettings();
-        }
-
-        private void SetSFXVolume(float value)
-        {
-            SetMixerVolume("SFX", value);
-            GameSettings.CurrentSettings.SFXVolume = value;
-            GameSettings.SaveSettings();
-        }
-
-        private void SetMixerVolume(string parameterName, float normalizedValue)
-        {
-            float dB = Mathf.Lerp(-80f, 0f, normalizedValue);
-            audioMixer.SetFloat(parameterName, dB);
         }
     }
 }

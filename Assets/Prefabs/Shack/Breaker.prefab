@@ -393,7 +393,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bc9989ccff49140ac5490cc2fc0288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activationItem: {fileID: 0}
   activationTime: 2
+  activationPenalty: 30
   OnStartInteraction:
     m_PersistentCalls:
       m_Calls: []
@@ -765,7 +767,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bc9989ccff49140ac5490cc2fc0288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activationItem: {fileID: 0}
   activationTime: 1
+  activationPenalty: 0
   OnStartInteraction:
     m_PersistentCalls:
       m_Calls: []
@@ -1163,7 +1167,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bc9989ccff49140ac5490cc2fc0288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activationItem: {fileID: 0}
   activationTime: 1
+  activationPenalty: 0
   OnStartInteraction:
     m_PersistentCalls:
       m_Calls: []
@@ -1561,7 +1567,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bc9989ccff49140ac5490cc2fc0288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activationItem: {fileID: 0}
   activationTime: 1
+  activationPenalty: 0
   OnStartInteraction:
     m_PersistentCalls:
       m_Calls: []
@@ -1959,7 +1967,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bc9989ccff49140ac5490cc2fc0288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activationItem: {fileID: 0}
   activationTime: 1
+  activationPenalty: 0
   OnStartInteraction:
     m_PersistentCalls:
       m_Calls: []

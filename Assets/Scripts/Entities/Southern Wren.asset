@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: Southern Wren
   m_EditorClassIdentifier: 
   EntityName: "Po\u0142udnica"
+  recordedSounds: []
+  recordedImages: []
+  lowPresenceEvents:
+  - {fileID: 11400000, guid: a627d28786276e64da02f465ee9f6975, type: 2}
+  mediumPresenceEvents: []
+  highPresenceEvents: []

@@ -6,11 +6,14 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 namespace GreenHour.GameSettings
 {
     public class SettingsUIManager : MonoBehaviour
     {
+        public GameObject defaultItem;
+        private EventSystem eventSystem;
         [Header("Screen")]
         public TMP_Dropdown resolutionDropdown;
         public TMP_Dropdown graphicsDropdown;
@@ -19,11 +22,14 @@ namespace GreenHour.GameSettings
         [Space]
         public Toggle fullscreenToggle;
         public Toggle vsyncToggle;
+        public Toggle immersionInToggle;
+        public Toggle immersionOutToggle;
 
         [Header("Audio")]
         public Slider masterSlider;
         public Slider musicSlider;
         public Slider sfxSlider;
+        public Slider smellSlider;
 
         private Resolution[] availableResolutions;
 
@@ -35,14 +41,22 @@ namespace GreenHour.GameSettings
 
         private void Start()
         {
+            if (eventSystem == null)
+            {
+                eventSystem = FindFirstObjectByType<EventSystem>();
+            }
+
             InitializeResolutions();
             InitializeGraphicsQuality();
             InitializeAudioSliders();
+            InitializeOther();
         }
 
         private void OnEnable()
         {
-            if(disableMovement)disableMovement.Raise();
+            if (eventSystem == null) eventSystem = FindFirstObjectByType<EventSystem>();
+            if (disableMovement)disableMovement.Raise();
+            if (eventSystem && defaultItem) eventSystem.SetSelectedGameObject(defaultItem);
         }
 
         private void OnDisable()
@@ -133,6 +147,29 @@ namespace GreenHour.GameSettings
         }
 
         //Overall
+        private void InitializeOther()
+        {
+            if (smellSlider)
+            {
+                smellSlider.value = GameSettings.CurrentSettings.SmellIntensity;
+                smellSlider.onValueChanged.AddListener(GraphicsSettingsApplier.SetSmellIntensity);
+            }
+            
+            if (immersionOutToggle)
+            {
+                immersionOutToggle.isOn = GameSettings.CurrentSettings.enableImmersionGiver;
+                immersionOutToggle.onValueChanged.AddListener(GraphicsSettingsApplier.SetImmersionGiver);
+            }
+            
+            if (immersionOutToggle)
+            {
+                immersionOutToggle.isOn = GameSettings.CurrentSettings.enableImmersionReader;
+                immersionInToggle.onValueChanged.AddListener(GraphicsSettingsApplier.SetImmersionReader);
+            }
+            
+
+        }
+
         [ContextMenu("Save settings")]
         public void SaveSettings()
         {

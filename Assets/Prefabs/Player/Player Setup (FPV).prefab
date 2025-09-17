@@ -354,6 +354,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7989078610241643352}
     m_Modifications:
+    - target: {fileID: 336904851395747443, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
+      propertyPath: far clip plane
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 336904851395747443, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
+      propertyPath: m_AllowDynamicResolution
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1611327557663127772, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
       propertyPath: resultUI
       value: 
@@ -370,6 +378,22 @@ PrefabInstance:
       propertyPath: interactionAnimator
       value: 
       objectReference: {fileID: 6026862221051428526}
+    - target: {fileID: 3854797915528781551, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
+      propertyPath: allowDynamicResolution
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3854797915528781551, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
+      propertyPath: customRenderingSettings
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3854797915528781551, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
+      propertyPath: allowDeepLearningSuperSampling
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3854797915528781551, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
+      propertyPath: allowFidelityFX2SuperResolution
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4433318664393792370, guid: b35d9d42320d799418031c1a9fc5e67f, type: 3}
       propertyPath: m_Name
       value: Player (FPV)

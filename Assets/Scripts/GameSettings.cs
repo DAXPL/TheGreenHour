@@ -183,6 +183,20 @@ namespace GreenHour.GameSettings
 
             return hdCam;
         }
+
+
+        public static void SetImmersionGiver(bool arg)
+        {
+            GameSettings.CurrentSettings.enableImmersionGiver = arg;
+        }
+        public static void SetImmersionReader(bool arg)
+        {
+            GameSettings.CurrentSettings.enableImmersionReader = arg;
+        }
+        public static void SetSmellIntensity(float value)
+        {
+            GameSettings.CurrentSettings.SmellIntensity = value;
+        }
     }
 
     [System.Serializable]

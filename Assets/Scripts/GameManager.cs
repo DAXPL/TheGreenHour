@@ -34,6 +34,7 @@ namespace GreenHour.Gameplay
         private void Start() 
         {
             GraphicsSettingsApplier.LoadSettings();
+            Shader.WarmupAllShaders();
             if (entities.Count <= 0)
             {
                 Debug.LogError("No entities!");

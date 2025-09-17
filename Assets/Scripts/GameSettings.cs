@@ -2,9 +2,7 @@
 using System.IO;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace GreenHour.GameSettings
 {

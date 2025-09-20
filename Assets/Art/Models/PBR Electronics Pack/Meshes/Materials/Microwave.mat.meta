@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8944c7880e6695448a173270a7f2190e
+timeCreated: 1437054170
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38741
+  packageName: PBR Electronics Pack
+  packageVersion: 1.1
+  assetPath: Assets/PBR Electronics Pack/Meshes/Materials/Microwave.mat
+  uploadId: 323192

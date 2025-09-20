@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e586aeabe04d67d4d84c8ccd9eda9107
+timeCreated: 1437054182
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38741
+  packageName: PBR Electronics Pack
+  packageVersion: 1.1
+  assetPath: Assets/PBR Electronics Pack/Meshes/Materials/TV.mat
+  uploadId: 323192

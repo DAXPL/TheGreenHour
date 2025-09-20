@@ -7,6 +7,7 @@ namespace GreenHour.Interactions
     public class Interactor : MonoBehaviour
     {
         [SerializeField] private ItemData activationItem;
+        [SerializeField] private string description;
         [SerializeField] private float activationTime = 2.0f;
         [SerializeField] private int activationPenalty = 0;
         private float activationTimer = 0.0f;
@@ -65,6 +66,21 @@ namespace GreenHour.Interactions
         {
             if(!isInInteraction) return 0.0f;
             return activationTimer / activationTime;
+        }
+
+        public float GetPenalty()
+        {
+            return activationPenalty;
+        }
+
+        public string GetDescription()
+        {
+            return description;
+        }
+
+        public ItemData GetNeededItemData()
+        {
+            return activationItem;
         }
     }
 }

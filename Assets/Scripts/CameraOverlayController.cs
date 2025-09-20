@@ -12,7 +12,6 @@ namespace GreenHour.UI
         [Header("Gameplay UI")]
         [SerializeField] private TextMeshProUGUI dateTMP;
         [SerializeField] private TextMeshProUGUI resolutionTMP;
-        [SerializeField] private TextMeshProUGUI infoTMP;
         [SerializeField] private TextMeshProUGUI statsTMP;
         [SerializeField] private TextMeshProUGUI fastForwardTMP;
         [Space]
@@ -33,7 +32,6 @@ namespace GreenHour.UI
             if (fastForwardTMP) fastForwardTMP.gameObject.SetActive(false);
             if (dateTMP) dateTMP.SetText($"{System.DateTime.Now}");
             if (resolutionTMP) resolutionTMP.SetText($"{Screen.height}P");
-            if (infoTMP) infoTMP.SetText("");
         }
 
         private void Update()

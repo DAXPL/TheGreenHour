@@ -2,14 +2,11 @@ using GreenHour.Gameplay;
 using GreenHour.Interactions;
 using GreenHour.Interactions.Items;
 using GreenHour.PhysicsSurface;
-using System;
-using Unity.VisualScripting;
+using TMPro;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
-using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 namespace GreenHour.Player
@@ -39,6 +36,7 @@ namespace GreenHour.Player
         [SerializeField] private GameObject interactionUI;
         [SerializeField] private GameObject resultUI;
         [SerializeField] private Image progressImage;
+        [SerializeField] private TextMeshProUGUI usageText;
 
         private void OnEnable()
         {
@@ -163,6 +161,8 @@ namespace GreenHour.Player
             Interactor i = GetInteractor(out Item item);
             interactionAnimator?.SetBool("isActive", (i != null && i.enabled != false || item != null && item.enabled != false));
 
+            if(usageText)usageText.SetText(MakeUsageDescription(i, item));
+            
             if (interactor == null)
             {
                 if (progressImage) progressImage.fillAmount = 0;
@@ -241,6 +241,7 @@ namespace GreenHour.Player
 
             if(itemGrabOrigin) itemGrabOrigin.StartManualInteraction((IXRSelectInteractable)item.gameObject.GetComponent(typeof(IXRSelectInteractable)));
         }
+        
         public void ItemRelease()
         {
             if (grabbedItem == null) return;
@@ -251,6 +252,20 @@ namespace GreenHour.Player
             {
                 rb.AddForce(playerCamera.transform.forward * pushForce);
             }
+        }
+    
+        private string MakeUsageDescription(Interactor i, Item item)
+        {
+            if (item && item.enabled) return $"{item.GetData().itemName}";
+
+            if (i == null || (i!=null && i.enabled == false)) return "";
+            string desc = $"{i.GetDescription()}";
+            float time = i.GetPenalty();
+            ItemData reqItem = i.GetNeededItemData();
+
+            if (time > 0) desc += $"\nTakes {time} minutes to finish";
+            if (reqItem) desc += $"\n{reqItem.itemName} is needed";
+            return desc;
         }
     }
 }

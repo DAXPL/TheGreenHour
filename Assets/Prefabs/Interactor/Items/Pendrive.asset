@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f19ee97ab7613914d99dd662685cac19, type: 3}
+  m_Name: Pendrive
+  m_EditorClassIdentifier: 
+  itemName: "Very-Super-Hiper High Speed \u200B\u200BUSB 2.0 Type-A/B/C/Micro/Macro
+    Flash Drive with 128GB/116GB/16GB/512MB/1TB/2TB/512TB Capacity and 1 maybe 8
+    Memory Clip & 2 or 7 Pairs - Compatible with Smartphones, TVs, Tablets, Laptops,
+    Smart Fridges, Dumb Fridges, 5,56 NATO, Versatile Data Transfer, Modern Accessories,
+    (not)Durable Housing, kevlar, ceramic plating Versatile Data Transfer | Modern
+    Accessory | Durable Body, USB/HDD/SSD/SSHD/Floppy/Sata/NVME/RAM/FAN/SRAM/DRAM
+    Flash Drive. WITH AI!!!!"

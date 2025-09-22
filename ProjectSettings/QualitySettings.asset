@@ -102,9 +102,9 @@ QualitySettings:
     customRenderPipeline: {fileID: 11400000, guid: b77f7dd012d9cf0488799cb01b7004e1, type: 2}
     terrainQualityOverrides: 12
     terrainPixelError: 1
-    terrainDetailDensityScale: 0.4
+    terrainDetailDensityScale: 0.3
     terrainBasemapDistance: 1000
-    terrainDetailDistance: 11
+    terrainDetailDistance: 10
     terrainTreeDistance: 5000
     terrainBillboardStart: 50
     terrainFadeLength: 5
@@ -154,9 +154,9 @@ QualitySettings:
     customRenderPipeline: {fileID: 11400000, guid: cbe3d1574b126944ebabaabef1f48629, type: 2}
     terrainQualityOverrides: 14
     terrainPixelError: 1
-    terrainDetailDensityScale: 0.8
+    terrainDetailDensityScale: 0.7
     terrainBasemapDistance: 1000
-    terrainDetailDistance: 30
+    terrainDetailDistance: 20
     terrainTreeDistance: 5000
     terrainBillboardStart: 50
     terrainFadeLength: 5

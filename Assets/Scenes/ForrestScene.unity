@@ -18489,7 +18489,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4894476191231501481, guid: 841f98c8eb2de1c48b8e64661f803ab1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.11
+      value: -9.661
       objectReference: {fileID: 0}
     - target: {fileID: 4894476191231501481, guid: 841f98c8eb2de1c48b8e64661f803ab1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18497,7 +18497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4894476191231501481, guid: 841f98c8eb2de1c48b8e64661f803ab1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.18
+      value: -9.254
       objectReference: {fileID: 0}
     - target: {fileID: 4894476191231501481, guid: 841f98c8eb2de1c48b8e64661f803ab1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18860,7 +18860,7 @@ Transform:
   m_GameObject: {fileID: 507397459}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.200012, y: 18.953297, z: -99.55442}
+  m_LocalPosition: {x: -8.125031, y: 19.668537, z: -110.6144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18928,7 +18928,7 @@ MonoBehaviour:
     invertFade: 0
     distanceFadeStart: 10000
     distanceFadeEnd: 10000
-    textureOffset: {x: -0, y: -0, z: -0}
+    textureOffset: {x: 0, y: 0, z: 0}
     falloffMode: 0
     maskMode: 0
     materialMask: {fileID: 0}

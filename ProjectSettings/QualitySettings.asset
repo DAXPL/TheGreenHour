@@ -4,7 +4,7 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 2
+  m_CurrentQuality: 0
   m_QualitySettings:
   - serializedVersion: 4
     name: Low
@@ -102,7 +102,7 @@ QualitySettings:
     customRenderPipeline: {fileID: 11400000, guid: b77f7dd012d9cf0488799cb01b7004e1, type: 2}
     terrainQualityOverrides: 12
     terrainPixelError: 1
-    terrainDetailDensityScale: 0.3
+    terrainDetailDensityScale: 0.4
     terrainBasemapDistance: 1000
     terrainDetailDistance: 10
     terrainTreeDistance: 5000

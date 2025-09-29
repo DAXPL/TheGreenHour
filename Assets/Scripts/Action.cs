@@ -9,6 +9,7 @@ namespace GreenHour.Gameplay
     {
         [SerializeField] protected List<ActionResult> results = new List<ActionResult> ();
         [SerializeField] protected bool singleUse = true;
+        [SerializeField] protected bool isPassive = false;
         [SerializeField] protected PresenceLevel minimalPresenceLevel = PresenceLevel.None;
         public UnityEvent SetupAction;
         public UnityEvent OnActionTaken;
@@ -31,14 +32,20 @@ namespace GreenHour.Gameplay
             actionAvailable = false;
             OnActionTaken.Invoke();
         }
-        
+
         public virtual bool GetPenalty(Entity entity, out int presencePenalty, out int safetyPenalty) 
         {
-            presencePenalty= 0; 
+            presencePenalty = 0; 
             safetyPenalty=0;
+            if (!isPassive)
+            {
+                if (actionTaken == false) return false; 
+            }
+            else
+            {
+                if (actionAvailable == false) return false; 
+            }
 
-            if (actionAvailable == false) return false;
-            if (actionTaken == false) return false;
             foreach (var result in results) 
             { 
                 if(result == null) continue;
@@ -46,10 +53,11 @@ namespace GreenHour.Gameplay
                 {
                     presencePenalty = result.presencePenalty;
                     safetyPenalty = result.safetyPenalty;
+                    result.action.Invoke();
                     return true;
                 }
             }
-            return false;
+            return isPassive;
         }
         public void LockAction()
         {
@@ -68,5 +76,6 @@ namespace GreenHour.Gameplay
         public Entity entity;
         public int presencePenalty;
         public int safetyPenalty;
+        public UnityEvent action;
     }
 }

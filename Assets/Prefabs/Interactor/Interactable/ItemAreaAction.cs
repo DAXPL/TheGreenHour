@@ -46,6 +46,7 @@ namespace GreenHour.Gameplay
                                 Debug.Log($"Ok: {hit.gameObject.name}");
                                 presencePenalty = result.presencePenalty;
                                 safetyPenalty = result.safetyPenalty;
+                                result.action.Invoke();
                                 Destroy(hit.gameObject);
                                 return true;
                             }

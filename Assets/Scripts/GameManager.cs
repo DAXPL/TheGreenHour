@@ -59,7 +59,9 @@ namespace GreenHour.Gameplay
             {
                 if(action.enabled == false) continue;
                 actionsTaken++;
+                Debug.Log($"{action.gameObject.name}");
                 if (!action.GetPenalty(currentEntity, out int presencePenalty, out int safetyPenalty)) continue;
+                Debug.Log($"{action.gameObject.name} is valid");
                 presenceAmount += presencePenalty;
                 safetyAmount += safetyPenalty;
                 action.LockAction();
@@ -86,11 +88,9 @@ namespace GreenHour.Gameplay
         }
         public void LoadNextDay()
         {
-            Debug.LogWarningFormat($"{usedBedToSleep}{bedPosition != null}");
             if (usedBedToSleep==false && bedPosition!=null)
             {
                 CharacterController player = FindAnyObjectByType<CharacterController>();
-                Debug.LogWarningFormat($"{player != null}");
                 if (player != null) 
                 { 
                     player.enabled = false;
@@ -183,6 +183,11 @@ namespace GreenHour.Gameplay
         {
             Cursor.lockState = visible ? CursorLockMode.Confined : CursorLockMode.Locked;
             Cursor.visible = visible;
+        }
+    
+        public Entity GetCurrentEntity()
+        {
+            return currentEntity;
         }
     }
 }

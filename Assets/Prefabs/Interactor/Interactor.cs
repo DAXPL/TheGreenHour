@@ -37,7 +37,7 @@ namespace GreenHour.Interactions
             OnStopInteraction.Invoke();
         }
 
-        private void InteractionSucceed()
+        public void InteractionSucceed()
         {
             ItemData usedItem = itemInUse;
             StopInteraction();

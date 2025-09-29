@@ -19,7 +19,7 @@ namespace GreenHour.UI
             safetyDesc.text = "";
             presenceDesc.text = "";
             nextButton.SetActive(false);
-            disableMovement.Raise();
+            if(disableMovement)disableMovement.Raise();
 
             if ((GameManager.Instance)) GameManager.Instance.SetCursor(true);
             string safetyText = GameManager.Instance != null ? GameManager.Instance.GetSafetyDesc() : "Missing no.";
@@ -48,7 +48,7 @@ namespace GreenHour.UI
             }
             group.alpha = 1.0f;
             nextButton.SetActive(false);
-            enableMovement.Raise();
+            if(enableMovement)enableMovement.Raise();
             float f = 1;
             while (f >= -0.1f)
             {

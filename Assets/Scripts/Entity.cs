@@ -94,5 +94,14 @@ namespace GreenHour.Gameplay
                     break;
             }
         }
+        
+        public Sprite GetRecordedImage(int id)
+        {
+            if(recordedImages.Length <= 0) return null;
+            if (id >= recordedImages.Length) id = recordedImages.Length;
+            if (id < 0) id = 0;
+            return recordedImages[id];
+        }
+    
     }
 }

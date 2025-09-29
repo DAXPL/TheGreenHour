@@ -503,21 +503,117 @@ MonoBehaviour:
   - entity: {fileID: 11400000, guid: 90c93e578197aaf4f83e6ca62e046b5b, type: 2}
     presencePenalty: 1
     safetyPenalty: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 575442e48c9e72043912ad1a7a5f1b8c, type: 2}
+          m_TargetAssemblyTypeName: GreenHour.Gameplay.Events.GameEvent, Assembly-CSharp
+          m_MethodName: Raise
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: By dawn, nothing remained but splinters. Whatever passed
+              here wanted to make sure no one would try that again.
+            m_BoolArgument: 0
+          m_CallState: 2
   - entity: {fileID: 11400000, guid: 2e736781fd663744c966bc03c4228847, type: 2}
     presencePenalty: 1
     safetyPenalty: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 575442e48c9e72043912ad1a7a5f1b8c, type: 2}
+          m_TargetAssemblyTypeName: GreenHour.Gameplay.Events.GameEvent, Assembly-CSharp
+          m_MethodName: Raise
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: "The bait was gone, but not eaten\u2014just scattered
+              in the dirt, like an insult."
+            m_BoolArgument: 0
+          m_CallState: 2
   - entity: {fileID: 11400000, guid: 4db5939c58a9d884795b6c371ac858eb, type: 2}
     presencePenalty: 1
     safetyPenalty: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 575442e48c9e72043912ad1a7a5f1b8c, type: 2}
+          m_TargetAssemblyTypeName: GreenHour.Gameplay.Events.GameEvent, Assembly-CSharp
+          m_MethodName: Raise
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: "The trap wasn\u2019t just broken\u2014it was scattered
+              wide, like someone tore it apart in a burst of restless energy."
+            m_BoolArgument: 0
+          m_CallState: 2
   - entity: {fileID: 11400000, guid: a2269df46b7f1124fb3061029432ae25, type: 2}
     presencePenalty: 1
     safetyPenalty: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 575442e48c9e72043912ad1a7a5f1b8c, type: 2}
+          m_TargetAssemblyTypeName: GreenHour.Gameplay.Events.GameEvent, Assembly-CSharp
+          m_MethodName: Raise
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: "The trap wasn\u2019t just broken\u2014it was scattered
+              wide, like someone tore it apart in a burst of restless energy."
+            m_BoolArgument: 0
+          m_CallState: 2
   - entity: {fileID: 11400000, guid: 4d0986c7c11844b4bb612f5a9f949ba4, type: 2}
     presencePenalty: 1
     safetyPenalty: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 575442e48c9e72043912ad1a7a5f1b8c, type: 2}
+          m_TargetAssemblyTypeName: GreenHour.Gameplay.Events.GameEvent, Assembly-CSharp
+          m_MethodName: Raise
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: "The bait was gone, but not eaten\u2014just scattered
+              in the dirt, like an insult."
+            m_BoolArgument: 0
+          m_CallState: 2
   - entity: {fileID: 11400000, guid: aedf5df1b84f39a4f90e64018bcc2e92, type: 2}
     presencePenalty: 1
     safetyPenalty: 0
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 575442e48c9e72043912ad1a7a5f1b8c, type: 2}
+          m_TargetAssemblyTypeName: GreenHour.Gameplay.Events.GameEvent, Assembly-CSharp
+          m_MethodName: Raise
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: By dawn, nothing remained but splinters. Whatever passed
+              here wanted to make sure no one would try that again.
+            m_BoolArgument: 0
+          m_CallState: 2
   singleUse: 1
   minimalPresenceLevel: 0
   SetupAction:

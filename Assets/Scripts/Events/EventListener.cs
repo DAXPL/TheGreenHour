@@ -7,6 +7,7 @@ namespace GreenHour.Gameplay.Events
     {
         public GameEvent action;
         public UnityEvent response;
+        public UnityEvent<string> responsePayload;
         private void OnEnable()
         {
             if(action)action.RegisterListener(this);
@@ -18,6 +19,7 @@ namespace GreenHour.Gameplay.Events
         public void Invoke()
         {
             response.Invoke();
+            if(action && action.GetPayload()!=null) responsePayload.Invoke(action.GetPayload());
         }
     }
 }

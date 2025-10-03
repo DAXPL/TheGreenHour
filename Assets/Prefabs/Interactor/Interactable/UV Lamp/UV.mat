@@ -349,7 +349,7 @@ Material:
     - _AlphaCutoffPrepass: 0.5
     - _AlphaCutoffShadow: 0.5
     - _AlphaDstBlend: 10
-    - _AlphaRemapMax: 0
+    - _AlphaRemapMax: 0.20393887
     - _AlphaRemapMax0: 1
     - _AlphaRemapMax1: 1
     - _AlphaRemapMax2: 1
@@ -361,7 +361,7 @@ Material:
     - _AlphaRemapMin3: 0
     - _AlphaSrcBlend: 1
     - _Anisotropy: 0
-    - _BlendMode: 4
+    - _BlendMode: 0
     - _CoatMask: 0
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
@@ -611,12 +611,12 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.43529415, g: 0, b: 1, a: 1}
+    - _BaseColor: {r: 0.4352941, g: 0, b: 1, a: 1}
     - _BaseColor0: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor1: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor2: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor3: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.4352941, g: 0, b: 1, a: 1}
+    - _Color: {r: 0.43529406, g: 0, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: -1.5032424e-14, g: -0.00000024558722, b: -2.0439285e+37, a: -6.8575177e+22}
     - _DiffusionProfileAsset0: {r: 0, g: 0, b: 0, a: 0}
     - _DiffusionProfileAsset1: {r: 0, g: 0, b: 0, a: 0}

@@ -28,7 +28,7 @@ namespace GreenHour.GameSettings
         public Slider musicSlider;
         public Slider sfxSlider;
         public Slider smellSlider;
-
+        public Slider mouseSensSlider;
         private Resolution[] availableResolutions;
 
         [Header("Events")]
@@ -164,8 +164,11 @@ namespace GreenHour.GameSettings
                 immersionOutToggle.isOn = GameSettings.CurrentSettings.enableImmersionReader;
                 immersionInToggle.onValueChanged.AddListener(GraphicsSettingsApplier.SetImmersionReader);
             }
-            
-
+            if (mouseSensSlider) 
+            {
+                mouseSensSlider.value = GameSettings.CurrentSettings.MouseIntensity;
+                mouseSensSlider.onValueChanged.AddListener(GraphicsSettingsApplier.SetMouseSensivity);
+            }
         }
 
         [ContextMenu("Save settings")]

@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using GreenHour.PhysicsSurface;
 using static GreenHour.PhysicsSurface.Surface;
 using static GreenHour.PhysicsSurface.SurfaceData;
+using GreenHour.GameSettings;
 
 namespace GreenHour.Player
 {
@@ -199,6 +200,7 @@ namespace GreenHour.Player
         private void HandleLook()
         {
             if (playerCamera == null) return;
+            if (GameSettings.GameSettings.CurrentSettings != null) lookSensitivity = GameSettings.GameSettings.CurrentSettings.MouseIntensity;
 
             float mouseX = lookInput.x * lookSensitivity;
             float mouseY = lookInput.y * lookSensitivity;

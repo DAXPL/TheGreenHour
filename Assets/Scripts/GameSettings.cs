@@ -195,6 +195,10 @@ namespace GreenHour.GameSettings
         {
             GameSettings.CurrentSettings.SmellIntensity = value;
         }
+        public static void SetMouseSensivity(float value)
+        {
+            GameSettings.CurrentSettings.MouseIntensity = value;
+        }
     }
 
     [System.Serializable]
@@ -211,6 +215,7 @@ namespace GreenHour.GameSettings
         public int UpscalingLevel = 0;
         public int GraphicsQuality = 2;
         public float SmellIntensity = 1.0f;
+        public float MouseIntensity = 1.0f;
         public bool enableImmersionGiver = false;
         public bool enableImmersionReader = false;
         public string selectedMicrophone = "";

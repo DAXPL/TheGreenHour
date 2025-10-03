@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4da062ffe11fac6459c3f888f60d086b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38741
+  packageName: PBR Electronics Pack
+  packageVersion: 1.1
+  assetPath: Assets/PBR Electronics Pack/Prefabs/Electric_kettle.prefab
+  uploadId: 323192

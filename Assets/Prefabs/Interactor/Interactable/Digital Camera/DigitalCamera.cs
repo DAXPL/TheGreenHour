@@ -1,5 +1,7 @@
+using GreenHour.Gameplay;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GreenHour.Interactions.Items 
 {
@@ -10,6 +12,8 @@ namespace GreenHour.Interactions.Items
         [SerializeField] private float sphereRadius = 1f;
         [SerializeField] private LayerMask detectionMask;
         bool render = false;
+        [SerializeField] private RawImage cameraPreview;
+        [SerializeField] private Image imagePreview;
         private void Start()
         {
             StartCoroutine(CameraLoop());
@@ -48,7 +52,18 @@ namespace GreenHour.Interactions.Items
         }
         public void TakePhoto()
         {
+            if(cameraPreview)cameraPreview.gameObject.SetActive(true);
+            if(imagePreview)imagePreview.gameObject.SetActive(false);
             SaveCameraScreenshot(cam.targetTexture, "camera_shot_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
+        }
+        public void LoadEntityPhoto()
+        {
+            if (imagePreview && GameManager.Instance)
+            {
+                Sprite img = GameManager.Instance?.GetCurrentEntity()?.GetRecordedImage(0);
+                imagePreview.gameObject.SetActive(img != null);
+                imagePreview.sprite = img;
+            }
         }
         private void SaveCameraScreenshot(RenderTexture rt, string filename)
         {

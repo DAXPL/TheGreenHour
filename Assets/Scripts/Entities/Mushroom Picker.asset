@@ -13,3 +13,13 @@ MonoBehaviour:
   m_Name: Mushroom Picker
   m_EditorClassIdentifier: 
   EntityName: Grzybiarz
+  recordedSounds: []
+  recordedImages:
+  - {fileID: 21300000, guid: e4129b14d60bb2c49b5b3a7c0062531d, type: 3}
+  lowPresenceEvents:
+  - {fileID: 11400000, guid: efffb3b4914e0e54c99fece283b0cbed, type: 2}
+  mediumPresenceEvents:
+  - {fileID: 11400000, guid: 0d8354003a2b82b43a44d6a440c06ec1, type: 2}
+  - {fileID: 11400000, guid: a627d28786276e64da02f465ee9f6975, type: 2}
+  highPresenceEvents:
+  - {fileID: 11400000, guid: febb7522981fd8549a36779bbfaed22e, type: 2}

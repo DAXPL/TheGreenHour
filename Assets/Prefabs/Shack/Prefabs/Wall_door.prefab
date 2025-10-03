@@ -49,9 +49,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: c206807714351a148a4c840bbc237834, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: c206807714351a148a4c840bbc237834, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 333fa383f8d77f640bdf5ba0bf128f14, type: 2}
+      objectReference: {fileID: 2100000, guid: 42587b1b2a7aef54f80b694f3ee90ed5, type: 2}
     - target: {fileID: 919132149155446097, guid: c206807714351a148a4c840bbc237834, type: 3}
       propertyPath: m_Name
       value: Wall_door
@@ -180,6 +184,90 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1001 &2635993508031358358
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6039828522609932536}
+    m_Modifications:
+    - target: {fileID: 1401746240209326, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_Name
+      value: WoodDoor01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401746240209326, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4300319930065006, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1173
+      objectReference: {fileID: 0}
+    - target: {fileID: 4300319930065006, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9279
+      objectReference: {fileID: 0}
+    - target: {fileID: 4300319930065006, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4300319930065006, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.958
+      objectReference: {fileID: 0}
+    - target: {fileID: 4300319930065006, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4300319930065006, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4300319930065006, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4300319930065006, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4300319930065006, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4300319930065006, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4300319930065006, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4300319930065006, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 64969138912156256, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65140264541946244, guid: bebc556220f8f12419248357a74e709f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 64969138912156256, guid: bebc556220f8f12419248357a74e709f, type: 3}
+    - {fileID: 65140264541946244, guid: bebc556220f8f12419248357a74e709f, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bebc556220f8f12419248357a74e709f, type: 3}
+--- !u!4 &2637888096509347320 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4300319930065006, guid: bebc556220f8f12419248357a74e709f, type: 3}
+  m_PrefabInstance: {fileID: 2635993508031358358}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6078576878062575379
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -229,9 +317,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 43ede0bcdb25a9146b2d09fcf4aa9562, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 43ede0bcdb25a9146b2d09fcf4aa9562, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 8aab3956acdcbfe41ac34f5cfb019d75, type: 2}
+      objectReference: {fileID: 2100000, guid: 16dc331a9a02dcc44869130a3966d22a, type: 2}
     - target: {fileID: 919132149155446097, guid: 43ede0bcdb25a9146b2d09fcf4aa9562, type: 3}
       propertyPath: m_Name
       value: Door
@@ -242,7 +334,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 43ede0bcdb25a9146b2d09fcf4aa9562, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2637888096509347320}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 43ede0bcdb25a9146b2d09fcf4aa9562, type: 3}
       insertIndex: -1
@@ -283,8 +378,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.098, y: 1.78, z: 1.18}
-  m_Center: {x: 0, y: 0.9, z: -0.6}
+  m_Size: {x: 0.049284, y: 1.7759001, z: 1.1670362}
+  m_Center: {x: 0.024357751, y: 0.89795005, z: -0.60647964}
 --- !u!54 &6566362709008682049
 Rigidbody:
   m_ObjectHideFlags: 0

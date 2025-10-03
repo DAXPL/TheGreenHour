@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0d259d4156e6dde4c8d18864bea46c29
+timeCreated: 1437054172
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38741
+  packageName: PBR Electronics Pack
+  packageVersion: 1.1
+  assetPath: Assets/PBR Electronics Pack/Meshes/Materials/Refrigerator.mat
+  uploadId: 323192

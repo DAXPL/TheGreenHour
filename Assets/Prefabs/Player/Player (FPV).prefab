@@ -182,6 +182,8 @@ GameObject:
   - component: {fileID: 2420509135092188987}
   - component: {fileID: 1611327557663127772}
   - component: {fileID: 641883666330477780}
+  - component: {fileID: 8875747611843537807}
+  - component: {fileID: 4946659055852910720}
   m_Layer: 13
   m_Name: Player (FPV)
   m_TagString: Player
@@ -246,8 +248,8 @@ MonoBehaviour:
   lookReference: {fileID: -5630151704836100654, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   crouchReference: {fileID: 7040659881675835329, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   playerCamera: {fileID: 336904851395747443}
-  amplitude: 0.02
-  frequency: 0.125
+  amplitude: 0.04
+  frequency: 0.04
   defaultSurfaceData: {fileID: 11400000, guid: bd53667b8aa17c34ba45013b94676ad0, type: 2}
   walkingMask:
     serializedVersion: 2
@@ -286,6 +288,7 @@ MonoBehaviour:
   grabOrigin: {fileID: 8138464338575200458}
   itemGrabOrigin: {fileID: 3432139397749221725}
   interactionUI: {fileID: 0}
+  resultUI: {fileID: 0}
   progressImage: {fileID: 0}
 --- !u!82 &641883666330477780
 AudioSource:
@@ -384,6 +387,62 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8875747611843537807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4433318664393792370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3877d863bb6d2104f927ae258c38f1b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: {fileID: 11400000, guid: 49b37c7f99eb06b43bef6feb9b190495, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2420509135092188987}
+        m_TargetAssemblyTypeName: GreenHour.Player.PlayerControllerFPV, Assembly-CSharp
+        m_MethodName: ToggleMovement
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4946659055852910720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4433318664393792370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3877d863bb6d2104f927ae258c38f1b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: {fileID: 11400000, guid: ba14dc50bb13169469be6529567fdcef, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2420509135092188987}
+        m_TargetAssemblyTypeName: GreenHour.Player.PlayerControllerFPV, Assembly-CSharp
+        m_MethodName: ToggleMovement
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &8737786152738480634
 GameObject:
   m_ObjectHideFlags: 0

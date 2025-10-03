@@ -1,38 +1,66 @@
-using System;
+using GreenHour.Gameplay.Events;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 namespace GreenHour.GameSettings
 {
     public class SettingsUIManager : MonoBehaviour
     {
+        public GameObject defaultItem;
+        private EventSystem eventSystem;
         [Header("Screen")]
         public TMP_Dropdown resolutionDropdown;
         public TMP_Dropdown graphicsDropdown;
+        public TMP_Dropdown upscalingDropdown;
+        public TMP_Dropdown upscalinglevelDropdown;
+        [Space]
         public Toggle fullscreenToggle;
         public Toggle vsyncToggle;
+        public Toggle immersionInToggle;
+        public Toggle immersionOutToggle;
 
         [Header("Audio")]
-        public AudioMixer audioMixer;
         public Slider masterSlider;
         public Slider musicSlider;
         public Slider sfxSlider;
-
+        public Slider smellSlider;
+        public Slider mouseSensSlider;
         private Resolution[] availableResolutions;
-        
+
+        [Header("Events")]
+        [SerializeField] private GameEvent enableMovement;
+        [SerializeField] private GameEvent disableMovement;
+
         [ContextMenu("Initialize")]
-        public void Initialize()
+
+        private void Start()
         {
+            if (eventSystem == null)
+            {
+                eventSystem = FindFirstObjectByType<EventSystem>();
+            }
+
             InitializeResolutions();
             InitializeGraphicsQuality();
             InitializeAudioSliders();
+            InitializeOther();
         }
 
         private void OnEnable()
         {
-            Initialize();
+            if (eventSystem == null) eventSystem = FindFirstObjectByType<EventSystem>();
+            if (disableMovement)disableMovement.Raise();
+            if (eventSystem && defaultItem) eventSystem.SetSelectedGameObject(defaultItem);
+        }
+
+        private void OnDisable()
+        {
+            if(enableMovement)enableMovement.Raise();
+            SaveSettings();
         }
         //Screen
         private void InitializeResolutions()
@@ -59,36 +87,37 @@ namespace GreenHour.GameSettings
             if (fullscreenToggle)
             {
                 fullscreenToggle.isOn = Screen.fullScreen;
-                if (fullscreenToggle) fullscreenToggle.onValueChanged.AddListener(SetFullscreen);
+                if (fullscreenToggle) fullscreenToggle.onValueChanged.AddListener(GraphicsSettingsApplier.SetFullscreen);
             }
 
             if (vsyncToggle)
             { 
                 vsyncToggle.isOn = QualitySettings.vSyncCount > 0;
-                vsyncToggle.onValueChanged.AddListener(SetVSync);
+                vsyncToggle.onValueChanged.AddListener(GraphicsSettingsApplier.ApplyVsync);
             }
-        }
+            if (upscalingDropdown)
+            {
+                List<string> upscalerOptions = new List<string> { "None", "DLSS", "FSR" };
+                upscalingDropdown.AddOptions(upscalerOptions);
+                upscalingDropdown.onValueChanged.AddListener(GraphicsSettingsApplier.SetUpscaling);
+                upscalingDropdown.onValueChanged.AddListener(index =>
+                {
+                    bool enableLevels = index != 0;
+                    if (upscalinglevelDropdown) upscalinglevelDropdown.interactable = enableLevels;
+                });
+            }
 
-        private void SetVSync(bool arg)
-        {
-            QualitySettings.vSyncCount = arg ? 1 : 0;
-            GameSettings.CurrentSettings.Vsync = arg;
-        }
-
-        private void SetFullscreen(bool arg)
-        {
-            Screen.fullScreen = arg;
-            GameSettings.CurrentSettings.Fullscreen = arg;
+            if (upscalinglevelDropdown)
+            {
+                List<string> upscalerLevels = new List<string> { "Quality", "Balanced", "Performance", "Maximum Performance" };
+                upscalinglevelDropdown.AddOptions(upscalerLevels);
+                upscalinglevelDropdown.onValueChanged.AddListener(GraphicsSettingsApplier.SetUpscalingLevel);
+            }    
         }
 
         private void SetResolution(int index)
         {
-            Resolution res = availableResolutions[index];
-            Screen.SetResolution(res.width, res.height, Screen.fullScreenMode, res.refreshRateRatio);
-
-            GameSettings.CurrentSettings.ScreenWidth = res.width;
-            GameSettings.CurrentSettings.ScreenHeight = res.height;
-            GameSettings.SaveSettings();
+            GraphicsSettingsApplier.SetResolution(availableResolutions[index]);
         }
 
         //Quality
@@ -101,59 +130,51 @@ namespace GreenHour.GameSettings
             graphicsDropdown.value = QualitySettings.GetQualityLevel();
             graphicsDropdown.RefreshShownValue();
 
-            graphicsDropdown.onValueChanged.AddListener(SetGraphicsQuality);
+            graphicsDropdown.onValueChanged.AddListener(GraphicsSettingsApplier.SetGraphicsQuality);
         }
-
-        private void SetGraphicsQuality(int index)
-        {
-            QualitySettings.SetQualityLevel(index);
-
-            GreenHour.GameSettings.GameSettings.CurrentSettings.GraphicsQuality = index;
-            GreenHour.GameSettings.GameSettings.SaveSettings();
-        }
-
-
+        
         //Audio
         private void InitializeAudioSliders()
         {
             masterSlider.value = GameSettings.CurrentSettings.MasterVolume;
             musicSlider.value = GameSettings.CurrentSettings.MusicVolume;
             sfxSlider.value = GameSettings.CurrentSettings.SFXVolume;
-
-            masterSlider.onValueChanged.AddListener(SetMasterVolume);
-            musicSlider.onValueChanged.AddListener(SetMusicVolume);
-            sfxSlider.onValueChanged.AddListener(SetSFXVolume);
-
-            SetMixerVolume("Master", masterSlider.value);
-            SetMixerVolume("Music", musicSlider.value);
-            SetMixerVolume("SFX", sfxSlider.value);
+            masterSlider.onValueChanged.AddListener(GraphicsSettingsApplier.SetMasterVolume);
+            musicSlider.onValueChanged.AddListener(GraphicsSettingsApplier.SetMusicVolume);
+            sfxSlider.onValueChanged.AddListener(GraphicsSettingsApplier.SetSFXVolume);
         }
 
-        private void SetMasterVolume(float value)
+        //Overall
+        private void InitializeOther()
         {
-            SetMixerVolume("Master", value);
-            GameSettings.CurrentSettings.MasterVolume = value;
+            if (smellSlider)
+            {
+                smellSlider.value = GameSettings.CurrentSettings.SmellIntensity;
+                smellSlider.onValueChanged.AddListener(GraphicsSettingsApplier.SetSmellIntensity);
+            }
+            
+            if (immersionOutToggle)
+            {
+                immersionOutToggle.isOn = GameSettings.CurrentSettings.enableImmersionGiver;
+                immersionOutToggle.onValueChanged.AddListener(GraphicsSettingsApplier.SetImmersionGiver);
+            }
+            
+            if (immersionOutToggle)
+            {
+                immersionOutToggle.isOn = GameSettings.CurrentSettings.enableImmersionReader;
+                immersionInToggle.onValueChanged.AddListener(GraphicsSettingsApplier.SetImmersionReader);
+            }
+            if (mouseSensSlider) 
+            {
+                mouseSensSlider.value = GameSettings.CurrentSettings.MouseIntensity;
+                mouseSensSlider.onValueChanged.AddListener(GraphicsSettingsApplier.SetMouseSensivity);
+            }
+        }
+
+        [ContextMenu("Save settings")]
+        public void SaveSettings()
+        {
             GameSettings.SaveSettings();
-        }
-
-        private void SetMusicVolume(float value)
-        {
-            SetMixerVolume("Music", value);
-            GameSettings.CurrentSettings.MusicVolume = value;
-            GameSettings.SaveSettings();
-        }
-
-        private void SetSFXVolume(float value)
-        {
-            SetMixerVolume("SFX", value);
-            GameSettings.CurrentSettings.SFXVolume = value;
-            GameSettings.SaveSettings();
-        }
-
-        private void SetMixerVolume(string parameterName, float normalizedValue)
-        {
-            float dB = Mathf.Lerp(-80f, 0f, normalizedValue);
-            audioMixer.SetFloat(parameterName, dB);
         }
     }
 }

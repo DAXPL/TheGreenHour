@@ -22,6 +22,7 @@ namespace GreenHour.Gameplay
                 {
                     presencePenalty = result.presencePenalty * waste;
                     safetyPenalty = result.safetyPenalty * waste;
+                    result.action.Invoke();
                     return true;
                 }
             }

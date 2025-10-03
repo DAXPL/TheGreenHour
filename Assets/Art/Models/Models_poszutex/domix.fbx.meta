@@ -1,9 +1,114 @@
 fileFormatVersion: 2
 guid: 01a3b6d22a3f0fc4a9f7084eb540c9bb
 ModelImporter:
-  serializedVersion: 20200
+  serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Klamki2
+    second: {fileID: 2100000, guid: 844a11baff7c6ab4b8087bc1f29f9915, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ogloszenie
+    second: {fileID: 2100000, guid: 8fae2798b04be444b9afea723e455f57, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ogloszenie1
+    second: {fileID: 2100000, guid: 16ff80c71599ea947bd32a22f7869831, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ogloszenie2
+    second: {fileID: 2100000, guid: c9d437ec2599c3b43a17cba54a56fe19, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ogloszenie3
+    second: {fileID: 2100000, guid: 80667dcfc7bf8f4419aa505b8ec7d8bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "Pod\u0142oga"
+    second: {fileID: 2100000, guid: a285f000ad9846549a07989c0088e805, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "Por\u0119cz"
+    second: {fileID: 2100000, guid: b68c1d9136eea054891defd3d0b59234, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tablica
+    second: {fileID: 2100000, guid: cd1f662a91dbf214f96086dbf1f1e499, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: drzwi 3
+    second: {fileID: 2100000, guid: 0d027487f17c8c14fbfc5dd48d5c9b4c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: drzwi1
+    second: {fileID: 2100000, guid: dc34752756ee7b643b16c5f1523eb49a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: drzwi2
+    second: {fileID: 2100000, guid: 0b308984be5cb464dbca6377695619ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: drzwi4
+    second: {fileID: 2100000, guid: 7ff4c65438dcb8d4fa217518e3c0a441, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: drzwi5
+    second: {fileID: 2100000, guid: ee9f0d5ec2a4b244cb3093e51140159e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: klamki1
+    second: {fileID: 2100000, guid: fafa5569d893c51428a6a9fcfa9c9e92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: klamki3
+    second: {fileID: 2100000, guid: 2829d427506eff94283ae68a8579d75f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: klosz
+    second: {fileID: 2100000, guid: 9d364944643a92747bffc25282c0c3d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: korek
+    second: {fileID: 2100000, guid: c46a4e0573888f14eaad4ddcdd763015, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: obramufka i sufit
+    second: {fileID: 2100000, guid: c9e15389a9566174b9261539af8602de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: raszki
+    second: {fileID: 2100000, guid: 26e75b22fd5fc184580d38baea7bb380, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "szk\u0142o"
+    second: {fileID: 2100000, guid: 3b2ef05026eac38459dcbf70f8fe99e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u015Bciany"
+    second: {fileID: 2100000, guid: 8616b68728f3713469acd1a56f73fee0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -14,9 +119,8 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -39,10 +143,12 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 0
     importLights: 0
+    nodeNameCollisionStrategy: 0
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 1
@@ -54,6 +160,7 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
+    optimizeBones: 1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -64,6 +171,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -96,6 +204,8 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

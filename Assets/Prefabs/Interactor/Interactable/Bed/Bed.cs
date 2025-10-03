@@ -15,7 +15,7 @@ namespace GreenHour.Interactions
             DayCycle.DayPhase dayPhase = dayCycle.GetCurrentPhase();
             if (dayPhase == DayCycle.DayPhase.Night || dayPhase == DayCycle.DayPhase.Dusk)
             {
-                manager.EndDay();
+                manager.EndDay(true);
             }
             else
             {

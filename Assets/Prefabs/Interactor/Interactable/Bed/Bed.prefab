@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1908273992217221213}
-  - component: {fileID: 3263234454105920322}
   - component: {fileID: 4767179476667651583}
   - component: {fileID: 1212585002596184185}
+  - component: {fileID: 1180501465087125672}
   m_Layer: 0
   m_Name: Bed
   m_TagString: Untagged
@@ -29,33 +29,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 253.686, y: 71.8998, z: -171.53703}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5631688066822361144}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3263234454105920322
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7233899072264722696}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.4558563, y: 0.2418518, z: 2.6506653}
-  m_Center: {x: -0.004798889, y: -0.0143966675, z: -0.0023956299}
 --- !u!114 &4767179476667651583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bc9989ccff49140ac5490cc2fc0288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activationItem: {fileID: 0}
+  description: 
   activationTime: 2
+  activationPenalty: 0
   OnStartInteraction:
     m_PersistentCalls:
       m_Calls: []
@@ -90,6 +72,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnToggle:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1212585002596184185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +87,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3fe7d4e2689414b88801bad03a49d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1180501465087125672
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7233899072264722696}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5, y: 0.24504372, z: 2.699836}
+  m_Center: {x: -0.0075996835, y: -0.012629732, z: 0.004656476}
 --- !u!1001 &5309039208252159955
 PrefabInstance:
   m_ObjectHideFlags: 0

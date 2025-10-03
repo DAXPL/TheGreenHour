@@ -23,7 +23,7 @@ MonoBehaviour:
   m_terrainWidth: 2048
   m_terrainDepth: 2048
   m_terrainHeight: 2048
-  m_seaLevel: 38.9
+  m_seaLevel: 0
   m_spawnDensity: 2
   m_isLocked: 0
   m_previewImageBytes: 
@@ -73,16 +73,104 @@ MonoBehaviour:
     sessionPlaybackState: 1
     m_terrainsFoldedOut: 0
     m_serializedExternalAction: 
+  - m_description: Clear World
+    m_operationType: 10
+    m_isActive: 1
+    m_affectedTerrainNames: []
+    m_operationDateTime: 07.09.2025 19:58:43
+    scriptableObjectAssetGUID: 
+    m_isFoldedOut: 0
+    sessionPlaybackState: 1
+    m_terrainsFoldedOut: 0
+    m_serializedExternalAction: 
+  - m_description: 'Creating World: 1 x 1 tiles, tile size: 512'
+    m_operationType: 0
+    m_isActive: 1
+    m_affectedTerrainNames:
+    - Terrain_0_0-20250907 - 195843
+    m_operationDateTime: 07.09.2025 19:58:44
+    scriptableObjectAssetGUID: 3873edbf6044cf84f98bc84875d45d2c
+    m_isFoldedOut: 0
+    sessionPlaybackState: 1
+    m_terrainsFoldedOut: 0
+    m_serializedExternalAction: 
+  - m_description: Clear World
+    m_operationType: 10
+    m_isActive: 1
+    m_affectedTerrainNames: []
+    m_operationDateTime: 07.09.2025 20:04:17
+    scriptableObjectAssetGUID: 
+    m_isFoldedOut: 0
+    sessionPlaybackState: 1
+    m_terrainsFoldedOut: 0
+    m_serializedExternalAction: 
+  - m_description: 'Creating World: 1 x 1 tiles, tile size: 512'
+    m_operationType: 0
+    m_isActive: 1
+    m_affectedTerrainNames:
+    - Terrain_0_0-20250907 - 200417
+    m_operationDateTime: 07.09.2025 20:04:18
+    scriptableObjectAssetGUID: 6ad790c35f3cc5349823baf45209e7ce
+    m_isFoldedOut: 0
+    sessionPlaybackState: 1
+    m_terrainsFoldedOut: 0
+    m_serializedExternalAction: 
+  - m_description: Spawning - Multiple Spawners (4)
+    m_operationType: 7
+    m_isActive: 1
+    m_affectedTerrainNames:
+    - Terrain_0_0-20250907 - 200417
+    m_operationDateTime: 07.09.2025 20:04:34
+    scriptableObjectAssetGUID: 0e6137d2ec99db848a70ae726c76ec35
+    m_isFoldedOut: 0
+    sessionPlaybackState: 1
+    m_terrainsFoldedOut: 0
+    m_serializedExternalAction: 
+  - m_description: Spawning - Multiple Spawners (4)
+    m_operationType: 7
+    m_isActive: 1
+    m_affectedTerrainNames:
+    - Terrain_0_0-20250907 - 200417
+    m_operationDateTime: 07.09.2025 20:05:00
+    scriptableObjectAssetGUID: 6b4fee7f15d39fb45afcd7bcedeb2330
+    m_isFoldedOut: 0
+    sessionPlaybackState: 1
+    m_terrainsFoldedOut: 0
+    m_serializedExternalAction: 
   m_terrainMinMaxCache:
   - guid: a42992580ab35fb4581c9575bf735c2d
     isWorldmap: 0
     recalculate: 0
     min: 15.812741
     max: 138.0021
+  - guid: 8414e385ff494914d99a42bf13e06448
+    isWorldmap: 0
+    recalculate: 0
+    min: 11.187671
+    max: 49.953888
   - guid: Worldmap
     isWorldmap: 1
     recalculate: 0
-    min: 38.675076
-    max: 126.63383
-  m_bakedMaskCacheEntries: []
+    min: 7.7450385
+    max: 25.318647
+  - guid: cd3271f2ca6046c408233879466e1010
+    isWorldmap: 0
+    recalculate: 0
+    min: 3.5000534
+    max: 26.141024
+  m_bakedMaskCacheEntries:
+  - fileName: Terrain_0_0-20250907 - 200417_LayerGameObject_3584_5
+    assetPath: Assets/Procedural Worlds/Packages - Install/Gaia/TerrainCollisionData/Terrain_0_0-20250907
+      - 200417/Terrain_0_0-20250907 - 200417_LayerGameObject_3584_5
+    fullPath: C:/UnityProjectsC/TheGreenHour/Assets/Procedural Worlds/Packages -
+      Install/Gaia/TerrainCollisionData/Terrain_0_0-20250907 - 200417/Terrain_0_0-20250907
+      - 200417_LayerGameObject_3584_5
+    texture: {fileID: 0}
+  - fileName: Terrain_0_0-20250907 - 200417_LayerGameObject_3072_0,75
+    assetPath: Assets/Procedural Worlds/Packages - Install/Gaia/TerrainCollisionData/Terrain_0_0-20250907
+      - 200417/Terrain_0_0-20250907 - 200417_LayerGameObject_3072_0,75
+    fullPath: C:/UnityProjectsC/TheGreenHour/Assets/Procedural Worlds/Packages -
+      Install/Gaia/TerrainCollisionData/Terrain_0_0-20250907 - 200417/Terrain_0_0-20250907
+      - 200417_LayerGameObject_3072_0,75
+    texture: {fileID: 0}
   m_worldBiomeMaskSettings: {fileID: 0}

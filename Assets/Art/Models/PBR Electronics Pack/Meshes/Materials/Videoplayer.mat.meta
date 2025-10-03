@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7474b3fd198a04841858f325e4ba4b0d
+timeCreated: 1437054185
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 38741
+  packageName: PBR Electronics Pack
+  packageVersion: 1.1
+  assetPath: Assets/PBR Electronics Pack/Meshes/Materials/Videoplayer.mat
+  uploadId: 323192

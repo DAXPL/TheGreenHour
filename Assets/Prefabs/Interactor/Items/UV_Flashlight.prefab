@@ -167,6 +167,7 @@ MonoBehaviour:
   m_ReinitializeDynamicAttachEverySingleGrab: 1
   m_AttachEaseInTime: 0.15
   m_MovementType: 2
+  m_PredictedVisualsTransform: {fileID: 0}
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
@@ -208,6 +209,10 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+  m_LimitLinearVelocity: 0
+  m_LimitAngularVelocity: 0
+  m_MaxLinearVelocityDelta: 10
+  m_MaxAngularVelocityDelta: 20
 --- !u!114 &8100025886550348819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,9 +397,9 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0.5388417, g: 0, b: 1, a: 1}
-  m_Intensity: 593.9743
-  m_Range: 10
-  m_SpotAngle: 60
+  m_Intensity: 866.42255
+  m_Range: 20
+  m_SpotAngle: 70.56621
   m_InnerSpotAngle: 9.87886
   m_CookieSize: 10
   m_Shadows:
@@ -465,7 +470,7 @@ MonoBehaviour:
   m_LightUnit: 0
   m_LuxAtDistance: 1
   m_Intensity: 0
-  m_InnerSpotPercent: 28.571428
+  m_InnerSpotPercent: 35.427723
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 2
   m_VolumetricDimmer: 1
